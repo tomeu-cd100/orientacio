@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessió 1: Descobrint les Meves Fortaleses</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 40px;
+            text-align: center;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            font-size: 1.4em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .example-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .vs-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .vs-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 15px;
+            width: 300px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .vs-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .good-at {
+            border: 3px solid #4caf50;
+        }
+
+        .like-to-do {
+            border: 3px solid #ff9800;
+        }
+
+        .vs {
+            font-size: 2em;
+            color: #ffeb3b;
+            font-weight: bold;
+            margin: 0 20px;
+        }
+
+        .tree-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .tree-svg {
+            width: 100%;
+            height: 500px;
+            animation: growTree 2s ease-out;
+        }
+
+        .tree-part {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .roots { animation-delay: 0.5s; }
+        .trunk { animation-delay: 1s; }
+        .branches { animation-delay: 1.5s; }
+        .leaves { animation-delay: 2s; }
+
+        .tree-labels {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .label {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            opacity: 0;
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        .label.roots-label {
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 2.5s;
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+        }
+
+        .label.branches-label {
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 3s;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight {
+            color: #ffeb3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes growTree {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vs-container {
+                flex-direction: column;
+            }
+            .vs-box {
+                width: 90%;
+            }
+            .vs {
+                transform: rotate(90deg);
+                margin: 20px 0;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .content {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">5</span>
+    </div>
+
+    <!-- Slide 1: Títol -->
+    <div class="slide active">
+        <h1>Descobrint les Meves Fortaleses</h1>
+        <div class="content">
+            <h2>Sessió 1: Qui sóc?</h2>
+            <p style="font-size: 1.2em; margin-top: 40px;">
+                Avui descobrirem que <span class="highlight">tots som únics</span> i tenim
+                <span class="highlight">qualitats especials</span> que ens fan ser qui som
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Tots som únics -->
+    <div class="slide">
+        <h2>Tots Tenim Qualitats Úniques</h2>
+        <div class="content">
+            <div class="example-box">
+                <p><span class="emoji">⭐</span> <strong>En Marc</strong> és molt bo explicant acudits i fent riure els companys</p>
+            </div>
+            <div class="example-box">
+                <p><span class="emoji">🎨</span> <strong>La Marta</strong> dibuixa súper bé i sempre ajuda als altres</p>
+            </div>
+            <div class="example-box">
+                <p><span class="emoji">⚽</span> <strong>L'Ahmed</strong> juga molt bé a futbol i és un bon amic</p>
+            </div>
+            <div class="example-box">
+                <p><span class="emoji">🎵</span> <strong>La Sofía</strong> té molt bon oreig per la música</p>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.3em;">
+                <span class="highlight">Cadascú té les seves qualitats especials!</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Diferència -->
+    <div class="slide">
+        <h2>No És El Mateix!</h2>
+        <div class="vs-container">
+            <div class="vs-box good-at">
+                <h3><span class="emoji">💪</span> El que se'm DONA BÉ</h3>
+                <p>• Són coses que faig sense esforç</p>
+                <p>• M'hi sento segur/a</p>
+                <p>• Els altres diuen que ho faig bé</p>
+                <br>
+                <p><strong>Exemple:</strong> Sóc bo jugant a bàsquet</p>
+            </div>
+            
+            <div class="vs">VS</div>
+            
+            <div class="vs-box like-to-do">
+                <h3><span class="emoji">❤️</span> El que m'AGRADA FER</h3>
+                <p>• Són coses que em fan feliç</p>
+                <p>• Hi passo temps sense avorrir-me</p>
+                <p>• M'emocionen</p>
+                <br>
+                <p><strong>Exemple:</strong> M'encanta jugar a videojocs</p>
+            </div>
+        </div>
+        <div class="example-box">
+            <p><span class="highlight">Important:</span> Està bé que siguin coses diferents! Podem ser bons en matemàtiques però preferir dibuixar.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: L'arbre de les qualitats -->
+    <div class="slide">
+        <h2>L'Arbre de les Qualitats</h2>
+        <div class="tree-container">
+            <svg class="tree-svg" viewBox="0 0 400 500">
+                <!-- Arrels -->
+                <g class="tree-part roots">
+                    <path d="M200 400 Q150 450 100 480" stroke="#8B4513" stroke-width="8" fill="none"/>
+                    <path d="M200 400 Q180 450 150 480" stroke="#8B4513" stroke-width="6" fill="none"/>
+                    <path d="M200 400 Q220 450 250 480" stroke="#8B4513" stroke-width="6" fill="none"/>
+                    <path d="M200 400 Q250 450 300 480" stroke="#8B4513" stroke-width="8" fill="none"/>
+                </g>
+                
+                <!-- Tronc -->
+                <g class="tree-part trunk">
+                    <rect x="180" y="200" width="40" height="200" fill="#8B4513" rx="5"/>
+                </g>
+                
+                <!-- Branques -->
+                <g class="tree-part branches">
+                    <path d="M190 200 Q120 150 80 100" stroke="#654321" stroke-width="12" fill="none"/>
+                    <path d="M200 180 Q160 130 130 80" stroke="#654321" stroke-width="8" fill="none"/>
+                    <path d="M210 200 Q280 150 320 100" stroke="#654321" stroke-width="12" fill="none"/>
+                    <path d="M200 180 Q240 130 270 80" stroke="#654321" stroke-width="8" fill="none"/>
+                    <path d="M195 160 Q200 120 200 80" stroke="#654321" stroke-width="10" fill="none"/>
+                </g>
+                
+                <!-- Fulles -->
+                <g class="tree-part leaves">
+                    <circle cx="80" cy="100" r="25" fill="#4CAF50"/>
+                    <circle cx="130" cy="80" r="20" fill="#66BB6A"/>
+                    <circle cx="200" cy="80" r="22" fill="#4CAF50"/>
+                    <circle cx="270" cy="80" r="20" fill="#66BB6A"/>
+                    <circle cx="320" cy="100" r="25" fill="#4CAF50"/>
+                    <circle cx="110" cy="120" r="18" fill="#81C784"/>
+                    <circle cx="290" cy="120" r="18" fill="#81C784"/>
+                </g>
+            </svg>
+            
+            <div class="tree-labels">
+                <div class="label branches-label">🌟 SOMNIS: El que vull aconseguir</div>
+                <div class="label roots-label">💪 HABILITATS: El que se'm dona bé</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Exemple complet -->
+    <div class="slide">
+        <h2>Exemple: L'Arbre de la Júlia</h2>
+        <div class="content">
+            <div class="vs-container">
+                <div class="vs-box" style="border: 3px solid #8B4513;">
+                    <h3><span class="emoji">🌳</span> ARRELS (Habilitats)</h3>
+                    <p>• Sóc bona escoltant els amics</p>
+                    <p>• Faig bé els dibuixos</p>
+                    <p>• Tinc bona memòria</p>
+                    <p>• Sé cuinar postres</p>
+                </div>
+                
+                <div class="vs-box" style="border: 3px solid #4CAF50;">
+                    <h3><span class="emoji">🌟</span> BRANQUES (Somnis)</h3>
+                    <p>• Vull ser pastissera</p>
+                    <p>• M'agradaria viatjar a Japó</p>
+                    <p>• Somio tenir un gos</p>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <p style="font-size: 1.2em;">
+                    <span class="highlight">Ara us toca a vosaltres!</span><br>
+                    Farem el VOSTRE arbre personal amb les VOSTRES qualitats úniques
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">Següent →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = n;
+            
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            if (currentSlide < 0) currentSlide = 0;
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>

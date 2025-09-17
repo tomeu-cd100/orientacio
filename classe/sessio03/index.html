@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Caixa de la Ràbia - Presentació</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .slide-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .slide {
+            padding: 60px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .slide h1 {
+            font-size: 3em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .slide h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        
+        .slide h3 {
+            font-size: 2em;
+            color: #34495e;
+            margin-bottom: 25px;
+        }
+        
+        .slide p, .slide li {
+            font-size: 1.4em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .slide ul {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .emoji {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+        
+        .body-signals {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .signal-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 10px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .signal-box h4 {
+            color: #e74c3c;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .techniques {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .technique-card {
+            background: linear-gradient(145deg, #f0f8ff, #e6f3ff);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: 2px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .technique-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .technique-card h4 {
+            color: #2980b9;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .technique-card .big-emoji {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .navigation {
+            text-align: center;
+            padding: 20px;
+            background: #34495e;
+        }
+        
+        .nav-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #2980b9;
+        }
+        
+        .nav-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .slide-counter {
+            color: white;
+            margin: 0 20px;
+            font-size: 1.1em;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .highlight-box p {
+            font-weight: bold;
+            color: #856404;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Diapositiva 1: Títol -->
+    <div class="slide-container">
+        <div class="slide" id="slide-1">
+            <h1>SESSIÓ 3</h1>
+            <div style="font-size: 4em; margin: 20px 0;">📦😡</div>
+            <h2>LA CAIXA DE LA RÀBIA</h2>
+            <p style="font-size: 1.8em; color: #e74c3c; font-weight: bold;">Gestió específica de la ràbia i frustració</p>
+            <p style="font-size: 1.2em; margin-top: 40px; color: #7f8c8d;">Durada: 15 minuts</p>
+        </div>
+    </div>
+
+    <!-- Diapositiva 2: La ràbia és normal -->
+    <div class="slide-container hidden">
+        <div class="slide" id="slide-2">
+            <h2>La ràbia és normal</h2>
+            <div style="font-size: 3em; margin: 20px 0;">✅ 😡 ✅</div>
+            
+            <div class="highlight-box">
+                <p>Totes les persones sentim ràbia de vegades</p>
+            </div>
+            
+            <ul style="font-size: 1.6em;">
+                <li><strong>És una emoció natural</strong> que ens ajuda a defensar-nos</li>
+                <li><strong>El problema no és sentir ràbia</strong>, sinó què fem amb ella</li>
+                <li><strong>Podem aprendre</strong> a gestionar-la millor</li>
+                <li><strong>No hem de tenir por</strong> de la ràbia, hem d'aprendre a conèixer-la</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Diapositiva 3: Senyals del cos -->
+    <div class="slide-container hidden">
+        <div class="slide" id="slide-3">
+            <h2>Senyals del cos quan estic enfadat</h2>
+            <p style="font-size: 1.5em; margin-bottom: 30px;">El meu cos m'avisa que estic començant a enfadar-me:</p>
+            
+            <div class="body-signals">
+                <div class="signal-box">
+                    <div style="font-size: 2.5em;">✊</div>
+                    <h4>Punys tancats</h4>
+                    <p>Les mans es tanquen soles</p>
+                </div>
+                
+                <div class="signal-box">
+                    <div style="font-size: 2.5em;">🔥</div>
+                    <h4>Cara calenta</h4>
+                    <p>Noto calor a la cara i les galtes</p>
+                </div>
+                
+                <div class="signal-box">
+                    <div style="font-size: 2.5em;">💓</div>
+                    <h4>Cor ràpid</h4>
+                    <p>El cor batega més fort i ràpid</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>Quan noto aquests senyals, és el moment d'utilitzar les meves tècniques!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositiva 4: Més senyals del cos -->
+    <div class="slide-container hidden">
+        <div class="slide" id="slide-4">
+            <h2>Altres senyals que podem notar</h2>
+            
+            <div class="body-signals">
+                <div class="signal-box">
+                    <div style="font-size: 2.5em;">😤</div>
+                    <h4>Respiració ràpida</h4>
+                    <p>Respiro més ràpid del normal</p>
+                </div>
+                
+                <div class="signal-box">
+                    <div style="font-size: 2.5em;">💪</div>
+                    <h4>Músculs tensos</h4>
+                    <p>Noto els braços i cames rígids</p>
+                </div>
+                
+                <div class="signal-box">
+                    <div style="font-size: 2.5em;">🌡️</div>
+                    <h4>Calor corporal</h4>
+                    <p>Tinc calor per tot el cos</p>
+                </div>
+            </div>
+            
+            <p style="font-size: 1.5em; color: #e74c3c; font-weight: bold;">Reconèixer aquests senyals és el primer pas per controlar la ràbia!</p>
+        </div>
+    </div>
+
+    <!-- Diapositiva 5: Tècniques senzilles -->
+    <div class="slide-container hidden">
+        <div class="slide" id="slide-5">
+            <h2>Tècniques senzilles per gestionar la ràbia</h2>
+            
+            <div class="techniques">
+                <div class="technique-card">
+                    <span class="big-emoji">🔢</span>
+                    <h4>Comptar fins a 10</h4>
+                    <p>Compto mentalment: 1, 2, 3... fins a 10. M'ajuda a relaxar-me.</p>
+                </div>
+                
+                <div class="technique-card">
+                    <span class="big-emoji">🚪</span>
+                    <h4>Sortir de l'espai</h4>
+                    <p>Si puc, m'allunyo de la situació per calmar-me.</p>
+                </div>
+                
+                <div class="technique-card">
+                    <span class="big-emoji">🌬️</span>
+                    <h4>Respirar profundament</h4>
+                    <p>Faig respiracions lentes i profundes per relaxar el cos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositiva 6: Com respirar correctament -->
+    <div class="slide-container hidden">
+        <div class="slide" id="slide-6">
+            <h2>Com fer la respiració profunda</h2>
+            <div style="font-size: 3em; margin: 20px 0;">🫁💨</div>
+            
+            <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h3 style="color: #27ae60; margin-bottom: 15px;">Pas a pas:</h3>
+                    <ol style="font-size: 1.4em; line-height: 1.8;">
+                        <li><strong>Inspiro pel nas</strong> comptant fins a 4</li>
+                        <li><strong>Aguanto l'aire</strong> comptant fins a 2</li>
+                        <li><strong>Expiro per la boca</strong> comptant fins a 6</li>
+                        <li><strong>Repeteixo</strong> 3 vegades més</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <p style="font-size: 1.3em; color: #27ae60; font-weight: bold;">Aquesta tècnica sempre funciona perquè calma el sistema nerviós!</p>
+        </div>
+    </div>
+
+    <!-- Diapositiva 7: La meva caixa de tècniques -->
+    <div class="slide-container hidden">
+        <div class="slide" id="slide-7">
+            <h2>La meva caixa de tècniques</h2>
+            <div style="font-size: 3em; margin: 20px 0;">🧰✨</div>
+            
+            <div style="background: #f8f9fa; border-radius: 15px; padding: 30px; margin: 20px 0;">
+                <h3 style="color: #2c3e50;">Quan noto que m'enfado:</h3>
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 20px;">
+                    <div style="background: white; border-radius: 10px; padding: 15px; margin: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="font-size: 2em;">🔢</div>
+                        <p><strong>Compto</strong></p>
+                    </div>
+                    <div style="background: white; border-radius: 10px; padding: 15px; margin: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="font-size: 2em;">🌬️</div>
+                        <p><strong>Respiro</strong></p>
+                    </div>
+                    <div style="background: white; border-radius: 10px; padding: 15px; margin: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="font-size: 2em;">🚪</div>
+                        <p><strong>Surto</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>Aquestes són les meves eines màgiques per controlar la ràbia!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diapositiva 8: Recordatori final -->
+    <div class="slide-container hidden">
+        <div class="slide" id="slide-8">
+            <h2>Recordem junts</h2>
+            <div style="font-size: 3em; margin: 20px 0;">🎯💪</div>
+            
+            <ul style="font-size: 1.6em; text-align: left; max-width: 800px; margin: 0 auto;">
+                <li><strong>La ràbia és normal</strong> - tothom la sent</li>
+                <li><strong>El meu cos m'avisa</strong> - estic atent als senyals</li>
+                <li><strong>Tinc tècniques</strong> - comptar, respirar, sortir</li>
+                <li><strong>Puc practicar</strong> - cada vegada ho faré millor</li>
+                <li><strong>Demano ajuda</strong> - si ho necessito</li>
+            </ul>
+            
+            <div style="background: #e8f5e8; border-radius: 15px; padding: 25px; margin: 30px 0;">
+                <p style="font-size: 1.8em; color: #27ae60; font-weight: bold;">
+                    Sóc capaç de gestionar la meva ràbia! 🌟
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegació -->
+    <div class="navigation">
+        <button class="nav-button" onclick="previousSlide()" id="prevBtn" disabled>⬅️ Anterior</button>
+        <span class="slide-counter" id="slideCounter">1 / 8</span>
+        <button class="nav-button" onclick="nextSlide()" id="nextBtn">Següent ➡️</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+
+        function showSlide(n) {
+            // Ocultar totes les diapositives
+            const slides = document.querySelectorAll('.slide-container');
+            slides.forEach(slide => slide.classList.add('hidden'));
+            
+            // Mostrar la diapositiva actual
+            document.querySelector(`#slide-${n}`).parentElement.classList.remove('hidden');
+            
+            // Actualitzar botons de navegació
+            document.getElementById('prevBtn').disabled = (n === 1);
+            document.getElementById('nextBtn').disabled = (n === totalSlides);
+            
+            // Actualitzar contador
+            document.getElementById('slideCounter').textContent = `${n} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Navegació amb teclat
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Inicialitzar
+        showSlide(1);
+    </script>
+</body>
+</html>

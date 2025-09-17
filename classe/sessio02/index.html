@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Semàfor de les Emocions - Sessió 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            page-break-after: always;
+            padding: 40px;
+            position: relative;
+        }
+
+        .slide:nth-child(odd) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .slide:nth-child(even) {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+        }
+
+        .slide:nth-child(3) {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        h3 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .semaforo {
+            font-size: 8em;
+            margin: 20px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .zones {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .zone {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 10px;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .zone:hover {
+            transform: translateY(-10px);
+        }
+
+        .zone-verd {
+            border-left: 8px solid #27ae60;
+        }
+
+        .zone-groc {
+            border-left: 8px solid #f1c40f;
+        }
+
+        .zone-vermell {
+            border-left: 8px solid #e74c3c;
+        }
+
+        .zone h4 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zone-emoji {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+
+        .zone ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.2em;
+        }
+
+        .zone li {
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .exemple {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
+
+        .exemple h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .passos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .pas {
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .pas:hover {
+            transform: scale(1.1);
+        }
+
+        .pas-emoji {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .arrow {
+            font-size: 3em;
+            color: #3498db;
+            animation: bounce 2s infinite;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media print {
+            .slide {
+                height: auto;
+                min-height: 100vh;
+                page-break-inside: avoid;
+            }
+        }
+
+        .big-text {
+            font-size: 2em;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: rgba(255,255,0,0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Diapositiva 1: Portada -->
+<div class="slide">
+    <div class="slide-number">1/7</div>
+    <div class="semaforo">🚦</div>
+    <h1>EL SEMÀFOR DE LES EMOCIONS</h1>
+    <h2>Sessió 2: Reconeixement i gestió emocional</h2>
+    <div class="big-text">Les emocions són com un semàfor que ens ajuda a navegar per la vida!</div>
+    <div class="footer">Material del Professorat</div>
+</div>
+
+<!-- Diapositiva 2: Introducció -->
+<div class="slide">
+    <div class="slide-number">2/7</div>
+    <h2>🤔 Què són les emocions?</h2>
+    <div class="big-text">
+        <div class="highlight">Les emocions són senyals que ens dona el nostre cos i la nostra ment</div>
+    </div>
+    <div style="font-size: 1.5em; margin: 40px 0;">
+        <p>📍 Ens diuen com ens sentim</p>
+        <p>📍 Ens ajuden a entendre què passa al nostre voltant</p>
+        <p>📍 Ens guien per prendre decisions</p>
+    </div>
+    <div class="big-text" style="color: #e74c3c;">
+        ✨ Totes les emocions són normals i útils! ✨
+    </div>
+</div>
+
+<!-- Diapositiva 3: El semàfor emocional -->
+<div class="slide">
+    <div class="slide-number">3/7</div>
+    <h2>🚦 El nostre semàfor interior</h2>
+    <div class="zones">
+        <div class="zone zone-verd">
+            <h4><span class="zone-emoji">🟢</span>ZONA VERDA</h4>
+            <ul>
+                <li>✅ Em sento tranquil i calmat</li>
+                <li>✅ Puc pensar amb claredat</li>
+                <li>✅ És el millor moment per actuar</li>
+                <li>✅ Puc prendre bones decisions</li>
+            </ul>
+        </div>
+        <div class="zone zone-groc">
+            <h4><span class="zone-emoji">🟡</span>ZONA GROGA</h4>
+            <ul>
+                <li>⚠️ Començo a sentir-me alterat</li>
+                <li>⚠️ Noto canvis en el meu cos</li>
+                <li>⚠️ És com un avís: "Atenció!"</li>
+                <li>⚠️ És hora de respirar i calmar-se</li>
+            </ul>
+        </div>
+        <div class="zone zone-vermell">
+            <h4><span class="zone-emoji">🔴</span>ZONA VERMELLA</h4>
+            <ul>
+                <li>🛑 Sento emocions molt intenses</li>
+                <li>🛑 El meu cos està molt activat</li>
+                <li>🛑 És difícil pensar amb claredat</li>
+                <li>🛑 PRIMER paro, DESPRÉS actuo</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 4: Exemples pràctics -->
+<div class="slide">
+    <div class="slide-number">4/7</div>
+    <h2>📚 Exemple: A l'escola</h2>
+    <div class="passos">
+        <div class="pas" style="background: #d5f4e6;">
+            <div class="pas-emoji">🟢</div>
+            <div>Estic concentrat fent els deures</div>
+        </div>
+        <div class="arrow">➡️</div>
+        <div class="pas" style="background: #fff3cd;">
+            <div class="pas-emoji">🟡</div>
+            <div>El meu company fa soroll i començo a molestar-me</div>
+        </div>
+        <div class="arrow">➡️</div>
+        <div class="pas" style="background: #f8d7da;">
+            <div class="pas-emoji">🔴</div>
+            <div>Estic tan enfadat que vull cridar-li!</div>
+        </div>
+    </div>
+    <div class="exemple">
+        <h4>🎯 Què faig quan estic en vermell?</h4>
+        <div style="font-size: 1.4em;">
+            1️⃣ <strong>PARO</strong> - No actuo immediatament<br>
+            2️⃣ <strong>RESPIRO</strong> - Tres respiracions profundes<br>
+            3️⃣ <strong>PENSO</strong> - Com puc solucionar-ho amb respecte?
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 5: Un altre exemple -->
+<div class="slide">
+    <div class="slide-number">5/7</div>
+    <h2>🏠 Exemple: A casa</h2>
+    <div class="passos">
+        <div class="pas" style="background: #d5f4e6;">
+            <div class="pas-emoji">🟢</div>
+            <div>Estic jugant tranquil·lament</div>
+        </div>
+        <div class="arrow">➡️</div>
+        <div class="pas" style="background: #fff3cd;">
+            <div class="pas-emoji">🟡</div>
+            <div>El meu germà agafa el meu joguet</div>
+        </div>
+        <div class="arrow">➡️</div>
+        <div class="pas" style="background: #f8d7da;">
+            <div class="pas-emoji">🔴</div>
+            <div>Estic furiós i vull pegar-li!</div>
+        </div>
+    </div>
+    <div class="exemple">
+        <h4>🎯 La solució màgica:</h4>
+        <div style="font-size: 1.4em;">
+            1️⃣ <strong>PARO</strong> - No pego ni crido<br>
+            2️⃣ <strong>RESPIRO</strong> - Calmo el meu cos<br>
+            3️⃣ <strong>DEMANO AJUDA</strong> - Parlo amb els pares
+        </div>
+    </div>
+</div>
+
+<!-- Diapositiva 6: El truc màgic -->
+<div class="slide">
+    <div class="slide-number">6/7</div>
+    <h2>✨ El truc màgic</h2>
+    <div class="big-text highlight">
+        Aprendre a PARAR abans d'actuar
+    </div>
+    <div style="font-size: 1.8em; margin: 40px 0;">
+        <div style="margin: 30px 0;">🌟 Quan estic en VERMELL...</div>
+        <div style="margin: 30px 0;">🛑 Primer PARO</div>
+        <div style="margin: 30px 0;">🫁 Després RESPIRO</div>
+        <div style="margin: 30px 0;">🧠 Finalment PENSO i ACTUO</div>
+    </div>
+    <div class="exemple">
+        <h4>🎪 Recordeu:</h4>
+        <p style="font-size: 1.3em;">Quan el semàfor està en vermell al carrer, què fem? <strong>PAREM!</strong><br>
+        El mateix amb les nostres emocions! 🚦</p>
+    </div>
+</div>
+
+<!-- Diapositiva 7: Resum i tancament -->
+<div class="slide">
+    <div class="slide-number">7/7</div>
+    <h2>🎯 Què hem après avui?</h2>
+    <div style="font-size: 1.6em; text-align: left; max-width: 800px;">
+        <div style="margin: 25px 0;">
+            <span style="font-size: 2em;">🟢</span> <strong>VERD:</strong> Tranquil, puc actuar
+        </div>
+        <div style="margin: 25px 0;">
+            <span style="font-size: 2em;">🟡</span> <strong>GROC:</strong> Alerta, millor respirar
+        </div>
+        <div style="margin: 25px 0;">
+            <span style="font-size: 2em;">🔴</span> <strong>VERMELL:</strong> Para! Respira primer
+        </div>
+    </div>
+    <div class="highlight" style="font-size: 1.4em; margin: 40px 0;">
+        💝 Totes les emocions són normals i ens ajuden<br>
+        🎪 El secret és aprendre a fer una pausa abans d'actuar
+    </div>
+    <div style="font-size: 2em; margin-top: 50px;">
+        🌟 Ara ja teniu el vostre semàfor emocional! 🌟
+    </div>
+</div>
+
+</body>
+</html>
