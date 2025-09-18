@@ -20,10 +20,9 @@
             text-align: center;
             height: 100vh;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
 
         .slide.active {
@@ -59,6 +58,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: slideInLeft 0.8s ease-out;
+            text-align: left;
         }
 
         .vs-container {
@@ -67,16 +67,17 @@
             align-items: center;
             margin: 30px 0;
             flex-wrap: wrap;
+            gap: 20px;
         }
 
         .vs-box {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
             padding: 30px;
-            margin: 15px;
-            width: 300px;
+            width: 320px;
             backdrop-filter: blur(10px);
             transition: transform 0.3s ease;
+            text-align: left;
         }
 
         .vs-box:hover {
@@ -101,63 +102,206 @@
         .tree-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             margin: 20px auto;
+            height: 450px;
         }
 
-        .tree-svg {
+        .tree-visual {
+            position: relative;
             width: 100%;
-            height: 500px;
-            animation: growTree 2s ease-out;
+            height: 100%;
+            margin: 0 auto;
         }
 
-        .tree-part {
+        .trunk {
+            position: absolute;
+            left: 50%;
+            bottom: 150px;
+            width: 30px;
+            height: 120px;
+            background: #8b4513;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .root {
+            position: absolute;
+            background: #8b4513;
+            border-radius: 3px;
+        }
+
+        .root1 {
+            bottom: 30px;
+            left: 30%;
+            width: 80px;
+            height: 8px;
+            transform: rotate(-25deg);
+        }
+
+        .root2 {
+            bottom: 20px;
+            left: 40%;
+            width: 60px;
+            height: 6px;
+            transform: rotate(-10deg);
+        }
+
+        .root3 {
+            bottom: 20px;
+            right: 40%;
+            width: 60px;
+            height: 6px;
+            transform: rotate(10deg);
+        }
+
+        .root4 {
+            bottom: 30px;
+            right: 30%;
+            width: 80px;
+            height: 8px;
+            transform: rotate(25deg);
+        }
+
+        .branch {
+            position: absolute;
+            background: #654321;
+            border-radius: 3px;
+        }
+
+        .branch1 {
+            top: 100px;
+            left: 20%;
+            width: 100px;
+            height: 10px;
+            transform: rotate(-30deg);
+        }
+
+        .branch2 {
+            top: 80px;
+            left: 30%;
+            width: 70px;
+            height: 8px;
+            transform: rotate(-15deg);
+        }
+
+        .branch3 {
+            top: 70px;
+            left: 48%;
+            width: 60px;
+            height: 8px;
+            transform: rotate(5deg);
+        }
+
+        .branch4 {
+            top: 80px;
+            right: 30%;
+            width: 70px;
+            height: 8px;
+            transform: rotate(15deg);
+        }
+
+        .branch5 {
+            top: 100px;
+            right: 20%;
+            width: 100px;
+            height: 10px;
+            transform: rotate(30deg);
+        }
+
+        .leaf {
+            position: absolute;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: leafGrow 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .leaf1 {
+            top: 90px;
+            left: 15%;
+            width: 40px;
+            height: 40px;
+            animation-delay: 2s;
+        }
+
+        .leaf2 {
+            top: 70px;
+            left: 30%;
+            width: 35px;
+            height: 35px;
+            animation-delay: 2.2s;
+        }
+
+        .leaf3 {
+            top: 60px;
+            left: 48%;
+            width: 38px;
+            height: 38px;
+            animation-delay: 2.4s;
+        }
+
+        .leaf4 {
+            top: 70px;
+            right: 30%;
+            width: 35px;
+            height: 35px;
+            animation-delay: 2.6s;
+        }
+
+        .leaf5 {
+            top: 90px;
+            right: 15%;
+            width: 40px;
+            height: 40px;
+            animation-delay: 2.8s;
+        }
+
+        .tree-label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
             opacity: 0;
             animation: fadeIn 0.5s ease-out forwards;
         }
 
-        .roots { animation-delay: 0.5s; }
-        .trunk { animation-delay: 1s; }
-        .branches { animation-delay: 1.5s; }
-        .leaves { animation-delay: 2s; }
-
-        .tree-labels {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
+        .label-branches {
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(76, 175, 80, 0.9);
+            animation-delay: 3s;
         }
 
-        .label {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
-            opacity: 0;
-            animation: popIn 0.5s ease-out forwards;
-        }
-
-        .label.roots-label {
+        .label-roots {
             bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            animation-delay: 2.5s;
             background: rgba(139, 69, 19, 0.9);
-            color: white;
+            animation-delay: 3.2s;
         }
 
-        .label.branches-label {
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation-delay: 3s;
-            background: rgba(76, 175, 80, 0.9);
-            color: white;
+        .final-boxes {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            margin: 30px 0;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .final-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            flex: 1;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            text-align: left;
         }
 
         .navigation {
@@ -167,6 +311,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 15px;
+            z-index: 1000;
         }
 
         .nav-btn {
@@ -199,6 +344,7 @@
             padding: 10px 15px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
+            z-index: 1000;
         }
 
         .highlight {
@@ -212,6 +358,13 @@
             margin: 0 10px;
         }
 
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 40px;
+            color: #e0e0e0;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -240,21 +393,10 @@
             }
         }
 
-        @keyframes growTree {
-            from {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes popIn {
+        @keyframes leafGrow {
             from {
                 opacity: 0;
-                transform: scale(0.5);
+                transform: scale(0);
             }
             to {
                 opacity: 1;
@@ -282,6 +424,9 @@
             .content {
                 font-size: 1.2em;
             }
+            .final-boxes {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -291,11 +436,11 @@
     </div>
 
     <!-- Slide 1: Títol -->
-    <div class="slide active">
+    <div class="slide active" id="slide-0">
         <h1>Descobrint les Meves Fortaleses</h1>
         <div class="content">
             <h2>Sessió 1: Qui sóc?</h2>
-            <p style="font-size: 1.2em; margin-top: 40px;">
+            <p class="subtitle">
                 Avui descobrirem que <span class="highlight">tots som únics</span> i tenim
                 <span class="highlight">qualitats especials</span> que ens fan ser qui som
             </p>
@@ -303,7 +448,7 @@
     </div>
 
     <!-- Slide 2: Tots som únics -->
-    <div class="slide">
+    <div class="slide" id="slide-1">
         <h2>Tots Tenim Qualitats Úniques</h2>
         <div class="content">
             <div class="example-box">
@@ -325,7 +470,7 @@
     </div>
 
     <!-- Slide 3: Diferència -->
-    <div class="slide">
+    <div class="slide" id="slide-2">
         <h2>No És El Mateix!</h2>
         <div class="vs-container">
             <div class="vs-box good-at">
@@ -354,57 +499,46 @@
     </div>
 
     <!-- Slide 4: L'arbre de les qualitats -->
-    <div class="slide">
+    <div class="slide" id="slide-3">
         <h2>L'Arbre de les Qualitats</h2>
         <div class="tree-container">
-            <svg class="tree-svg" viewBox="0 0 400 500">
-                <!-- Arrels -->
-                <g class="tree-part roots">
-                    <path d="M200 400 Q150 450 100 480" stroke="#8B4513" stroke-width="8" fill="none"/>
-                    <path d="M200 400 Q180 450 150 480" stroke="#8B4513" stroke-width="6" fill="none"/>
-                    <path d="M200 400 Q220 450 250 480" stroke="#8B4513" stroke-width="6" fill="none"/>
-                    <path d="M200 400 Q250 450 300 480" stroke="#8B4513" stroke-width="8" fill="none"/>
-                </g>
-                
+            <div class="tree-visual">
                 <!-- Tronc -->
-                <g class="tree-part trunk">
-                    <rect x="180" y="200" width="40" height="200" fill="#8B4513" rx="5"/>
-                </g>
+                <div class="trunk"></div>
+                
+                <!-- Arrels -->
+                <div class="root root1"></div>
+                <div class="root root2"></div>
+                <div class="root root3"></div>
+                <div class="root root4"></div>
                 
                 <!-- Branques -->
-                <g class="tree-part branches">
-                    <path d="M190 200 Q120 150 80 100" stroke="#654321" stroke-width="12" fill="none"/>
-                    <path d="M200 180 Q160 130 130 80" stroke="#654321" stroke-width="8" fill="none"/>
-                    <path d="M210 200 Q280 150 320 100" stroke="#654321" stroke-width="12" fill="none"/>
-                    <path d="M200 180 Q240 130 270 80" stroke="#654321" stroke-width="8" fill="none"/>
-                    <path d="M195 160 Q200 120 200 80" stroke="#654321" stroke-width="10" fill="none"/>
-                </g>
+                <div class="branch branch1"></div>
+                <div class="branch branch2"></div>
+                <div class="branch branch3"></div>
+                <div class="branch branch4"></div>
+                <div class="branch branch5"></div>
                 
                 <!-- Fulles -->
-                <g class="tree-part leaves">
-                    <circle cx="80" cy="100" r="25" fill="#4CAF50"/>
-                    <circle cx="130" cy="80" r="20" fill="#66BB6A"/>
-                    <circle cx="200" cy="80" r="22" fill="#4CAF50"/>
-                    <circle cx="270" cy="80" r="20" fill="#66BB6A"/>
-                    <circle cx="320" cy="100" r="25" fill="#4CAF50"/>
-                    <circle cx="110" cy="120" r="18" fill="#81C784"/>
-                    <circle cx="290" cy="120" r="18" fill="#81C784"/>
-                </g>
-            </svg>
-            
-            <div class="tree-labels">
-                <div class="label branches-label">🌟 SOMNIS: El que vull aconseguir</div>
-                <div class="label roots-label">💪 HABILITATS: El que se'm dona bé</div>
+                <div class="leaf leaf1"></div>
+                <div class="leaf leaf2"></div>
+                <div class="leaf leaf3"></div>
+                <div class="leaf leaf4"></div>
+                <div class="leaf leaf5"></div>
+                
+                <!-- Etiquetes -->
+                <div class="tree-label label-branches">🌟 SOMNIS: El que vull aconseguir</div>
+                <div class="tree-label label-roots">💪 HABILITATS: El que se'm dona bé</div>
             </div>
         </div>
     </div>
 
     <!-- Slide 5: Exemple complet -->
-    <div class="slide">
+    <div class="slide" id="slide-4">
         <h2>Exemple: L'Arbre de la Júlia</h2>
         <div class="content">
-            <div class="vs-container">
-                <div class="vs-box" style="border: 3px solid #8B4513;">
+            <div class="final-boxes">
+                <div class="final-box" style="border: 3px solid #8B4513;">
                     <h3><span class="emoji">🌳</span> ARRELS (Habilitats)</h3>
                     <p>• Sóc bona escoltant els amics</p>
                     <p>• Faig bé els dibuixos</p>
@@ -412,7 +546,7 @@
                     <p>• Sé cuinar postres</p>
                 </div>
                 
-                <div class="vs-box" style="border: 3px solid #4CAF50;">
+                <div class="final-box" style="border: 3px solid #4CAF50;">
                     <h3><span class="emoji">🌟</span> BRANQUES (Somnis)</h3>
                     <p>• Vull ser pastissera</p>
                     <p>• M'agradaria viatjar a Japó</p>
@@ -421,7 +555,7 @@
             </div>
             
             <div class="example-box">
-                <p style="font-size: 1.2em;">
+                <p style="font-size: 1.2em; text-align: center;">
                     <span class="highlight">Ara us toca a vosaltres!</span><br>
                     Farem el VOSTRE arbre personal amb les VOSTRES qualitats úniques
                 </p>
@@ -436,24 +570,41 @@
 
     <script>
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
+        const totalSlides = 5;
         
         document.getElementById('total-slides').textContent = totalSlides;
 
         function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
+            // Ocultar slide actual
+            const currentSlideElement = document.getElementById(`slide-${currentSlide}`);
+            if (currentSlideElement) {
+                currentSlideElement.classList.remove('active');
+            }
+            
+            // Actualitzar índex
             currentSlide = n;
             
+            // Verificar límits
             if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
             if (currentSlide < 0) currentSlide = 0;
             
-            slides[currentSlide].classList.add('active');
+            // Mostrar nou slide
+            const newSlideElement = document.getElementById(`slide-${currentSlide}`);
+            if (newSlideElement) {
+                newSlideElement.classList.add('active');
+            }
+            
+            // Actualitzar comptador
             document.getElementById('current-slide').textContent = currentSlide + 1;
             
-            // Update navigation buttons
-            document.getElementById('prev-btn').disabled = currentSlide === 0;
-            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+            // Actualitzar botons de navegació
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (prevBtn) prevBtn.disabled = currentSlide === 0;
+            if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
+            
+            console.log(`Mostrant slide ${currentSlide + 1}`);
         }
 
         function nextSlide() {
@@ -468,17 +619,21 @@
             }
         }
 
-        // Keyboard navigation
+        // Navegació amb teclat
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
                 nextSlide();
             } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
                 previousSlide();
             }
         });
 
-        // Initialize
-        showSlide(0);
+        // Inicialitzar
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(0);
+        });
     </script>
 </body>
 </html>
