@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Repte de la Comunicació</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .main-title {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .duration-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .activity-section {
+            margin-bottom: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .section-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #FFD700;
+        }
+
+        .section-duration {
+            margin-left: auto;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .materials-section {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .materials-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .materials-icon {
+            margin-right: 10px;
+            font-size: 1.8em;
+        }
+
+        .part-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .part-title {
+            font-size: 1.6em;
+            color: #90EE90;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .part-number {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-item {
+            background: rgba(255,255,255,0.1);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #FFD700;
+            transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step-item:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .step-text {
+            display: inline-block;
+            vertical-align: top;
+            width: calc(100% - 50px);
+            line-height: 1.6;
+        }
+
+        .timer-display {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .timer-icon {
+            margin-right: 8px;
+            font-size: 1.3em;
+        }
+
+        .discussion-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .discussion-title {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #d63031;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .question-card {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            border: 2px solid #ddd;
+        }
+
+        .question-card:hover {
+            transform: scale(1.05);
+            border-color: #ff6b6b;
+        }
+
+        .question-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2d3436;
+            line-height: 1.4;
+        }
+
+        .movie-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .movie-card {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: rotateY(5deg) scale(1.05);
+        }
+
+        .tips-section {
+            background: rgba(144, 238, 144, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid rgba(144, 238, 144, 0.5);
+        }
+
+        .tips-title {
+            font-size: 1.4em;
+            color: #90EE90;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .tip-item {
+            background: rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            border-left: 3px solid #90EE90;
+        }
+
+        .interactive-timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px 20px;
+            z-index: 1000;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+
+        .start-timer-btn {
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .start-timer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,184,148,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 2em; }
+            .section-title { font-size: 1.5em; }
+            .questions-grid { grid-template-columns: 1fr; }
+            .movie-cards-container { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .interactive-timer {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="main-title">🎬 EL REPTE DE LA COMUNICACIÓ</h1>
+            <p class="subtitle">Descobreix com de bé escoltes realment!</p>
+            <div class="duration-badge">⏱️ Durada total: 38 minuts</div>
+        </div>
+
+        <!-- Timer interactiu -->
+        <div class="interactive-timer" id="timer">
+            ⏰ Timer: 00:00
+        </div>
+
+        <!-- Materials -->
+        <div class="materials-section">
+            <h3 class="materials-title">
+                <span class="materials-icon">📦</span>
+                Materials necessaris
+            </h3>
+            <p style="font-size: 1.2em;">🎭 Targetes amb pel·lícules conegudes</p>
+            
+            <div class="movie-cards-container">
+                <div class="movie-card">🦁 El Rei Lleó</div>
+                <div class="movie-card">🕷️ Spider-Man</div>
+                <div class="movie-card">❄️ Frozen</div>
+                <div class="movie-card">🏰 Harry Potter</div>
+                <div class="movie-card">🚗 Fast & Furious</div>
+                <div class="movie-card">👑 Black Panther</div>
+                <div class="movie-card">🌊 Moana</div>
+                <div class="movie-card">🤖 Transformers</div>
+                <div class="movie-card">💍 El Senyor dels Anells</div>
+                <div class="movie-card">🦸‍♀️ Wonder Woman</div>
+                <div class="movie-card">🎵 La La Land</div>
+                <div class="movie-card">🚀 Star Wars</div>
+            </div>
+        </div>
+
+        <!-- Activitat Principal -->
+        <div class="activity-section">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">ACTIVITAT PRINCIPAL</h2>
+                <div class="section-duration">26 minuts</div>
+            </div>
+
+            <!-- Primera Part -->
+            <div class="part-container">
+                <h3 class="part-title">
+                    <span class="part-number">1</span>
+                    Telèfon trencat millorat
+                </h3>
+                <div class="timer-display">
+                    <span class="timer-icon">⏰</span>
+                    Durada: 10 minuts
+                    <button class="start-timer-btn" onclick="startTimer(10)">Iniciar Timer</button>
+                </div>
+                
+                <ul class="steps-list">
+                    <li class="step-item">
+                        <span class="step-number">1</span>
+                        <span class="step-text"><strong>Formació en cercle:</strong> Tots els alumnes s'assenten en cercle per facilitar la comunicació visual</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">2</span>
+                        <span class="step-text"><strong>Explicació inicial:</strong> El primer alumne tria una targeta i explica la pel·lícula en exactament 30 segons (cronometrar!)</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">3</span>
+                        <span class="step-text"><strong>Repetició en cadena:</strong> El següent alumne repeteix el que ha entès sense mirar la targeta original</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">4</span>
+                        <span class="step-text"><strong>Continuació:</strong> Continua la cadena fins que tots hagin participat</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">5</span>
+                        <span class="step-text"><strong>Comparació final:</strong> L'últim alumne explica la seva versió i es compara amb l'original</span>
+                    </li>
+                </ul>
+
+                <div class="tips-section">
+                    <h4 class="tips-title">💡 Consells per al professor</h4>
+                    <div class="tip-item">🎬 Assegura't que les pel·lícules siguin conegudes per la majoria</div>
+                    <div class="tip-item">⏱️ Controla estrictament els 30 segons per mantenir el ritme</div>
+                    <div class="tip-item">👀 Observa qui aplica les regles d'or de l'escolta</div>
+                    <div class="tip-item">📝 Pren notes dels canvis més divertits per comentar després</div>
+                </div>
+            </div>
+
+            <!-- Segona Part -->
+            <div class="part-container">
+                <h3 class="part-title">
+                    <span class="part-number">2</span>
+                    Treball en parelles
+                </h3>
+                <div class="timer-display">
+                    <span class="timer-icon">⏰</span>
+                    Durada: 16 minuts (8 + 8 per cada rol)
+                    <button class="start-timer-btn" onclick="startTimer(16)">Iniciar Timer</button>
+                </div>
+
+                <ul class="steps-list">
+                    <li class="step-item">
+                        <span class="step-number">1</span>
+                        <span class="step-text"><strong>Formació de parelles:</strong> Els alumnes es distribueixen en parelles (si són imparells, fer un grup de 3)</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">2</span>
+                        <span class="step-text"><strong>Primer torn (8 min total):</strong>
+                            <br>• Alumne A explica la seva pel·lícula preferida (3 min)
+                            <br>• Alumne B fa un resum del que ha entès (2 min)
+                            <br>• Feedback mutu sobre l'escolta (3 min)
+                        </span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">3</span>
+                        <span class="step-text"><strong>Segon torn (8 min total):</strong>
+                            <br>• Canvien els rols i repeteixen el procés
+                            <br>• Alumne B explica, Alumne A escolta i resumeix
+                        </span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">4</span>
+                        <span class="step-text"><strong>Aplicació de regles:</strong> Recordeu aplicar consciència les 3 regles d'or: mirar als ulls, no interrompre, preguntar si no entenc</span>
+                    </li>
+                </ul>
+
+                <div class="tips-section">
+                    <h4 class="tips-title">🎯 Objectius específics</h4>
+                    <div class="tip-item">👁️ Practicar el contacte visual durant la conversa</div>
+                    <div class="tip-item">🤐 Exercitar la paciència de no interrompre</div>
+                    <div class="tip-item">❓ Fomentar les preguntes aclareidores</div>
+                    <div class="tip-item">🔄 Comprovar la comprensió amb el resum</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posada en comú -->
+        <div class="discussion-section">
+            <h2 class="discussion-title">💬 POSADA EN COMÚ</h2>
+            <div class="timer-display" style="background: rgba(214,48,49,0.8); color: white;">
+                <span class="timer-icon">⏰</span>
+                Durada: 12 minuts
+                <button class="start-timer-btn" onclick="startTimer(12)" style="background: linear-gradient(45deg, #d63031, #e84393);">Iniciar Timer</button>
+            </div>
+
+            <div class="questions-grid">
+                <div class="question-card">
+                    <span class="question-icon">🔄</span>
+                    <p class="question-text">Què ha canviat més: el telèfon trencat o les parelles?</p>
+                </div>
+                <div class="question-card">
+                    <span class="question-icon">🎯</span>
+                    <p class="question-text">Quins trucs us han ajudat a escoltar millor?</p>
+                </div>
+                <div class="question-card">
+                    <span class="question-icon">😮</span>
+                    <p class="question-text">Què us ha sorprès més de l'activitat?</p>
+                </div>
+                <div class="question-card">
+                    <span class="question-icon">🎬</span>
+                    <p class="question-text">Quina versió de pel·lícula ha quedat més divertida?</p>
+                </div>
+            </div>
+
+            <div class="tips-section" style="background: rgba(214,48,49,0.2); border-color: #d63031;">
+                <h4 class="tips-title" style="color: #d63031;">🗣️ Guia per la discussió</h4>
+                <div class="tip-item" style="border-left-color: #d63031;">Deixa que comparteixin primer les seves impressions espontànies</div>
+                <div class="tip-item" style="border-left-color: #d63031;">Pregunta per situacions específiques on van aplicar les regles</div>
+                <div class="tip-item" style="border-left-color: #d63031;">Connecta amb exemples reals de la seva vida quotidiana</div>
+                <div class="tip-item" style="border-left-color: #d63031;">Reforça positivament els moments d'escolta activa observats</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+        let timeLeft;
+
+        function startTimer(minutes) {
+            // Clear any existing timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            timeLeft = minutes * 60; // Convert to seconds
+            const timerDisplay = document.getElementById('timer');
+            
+            // Add pulse effect
+            timerDisplay.classList.add('pulse');
+
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                timerDisplay.innerHTML = `⏰ Timer: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.innerHTML = '⏰ TEMPS ACABAT! 🔔';
+                    timerDisplay.style.background = 'linear-gradient(45deg, #d63031, #e84393)';
+                    
+                    // Play notification sound (if browser supports it)
+                    if (typeof Audio !== 'undefined') {
+                        // You can add a notification sound here
+                    }
+                    
+                    // Remove pulse and add completion effect
+                    timerDisplay.classList.remove('pulse');
+                    setTimeout(() => {
+                        timerDisplay.style.background = 'rgba(0,0,0,0.8)';
+                        timerDisplay.innerHTML = '⏰ Timer: 00:00';
+                    }, 5000);
+                }
+                
+                timeLeft--;
+            }, 1000);
+        }
+
+        // Add click effects to movie cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const movieCards = document.querySelectorAll('.movie-card');
+            movieCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.background = 'linear-gradient(45deg, #00b894, #00cec9)';
+                    this.style.color = 'white';
+                    setTimeout(() => {
+                        this.style.background = 'linear-gradient(45deg, #ff9a9e, #fecfef)';
+                        this.style.color = '#333';
+                    }, 1000);
+                });
+            });
+
+            // Add hover effects to step items
+            const stepItems = document.querySelectorAll('.step-item');
+            stepItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+                item.addEventListener('click', function() {
+                    this.style.background = 'rgba(255,255,255,0.2)';
+                    setTimeout(() => {
+                        this.style.background = 'rgba(255,255,255,0.1)';
+                    }, 500);
+                });
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '1') startTimer(10); // Part 1
+            if (e.key === '2') startTimer(16); // Part 2
+            if (e.key === '3') startTimer(12); // Discussion
+            if (e.key === 'Escape' && timerInterval) {
+                clearInterval(timerInterval);
+                document.getElementById('timer').innerHTML = '⏰ Timer aturat';
+            }
+        });
+    </script>
+</body>
+</html>

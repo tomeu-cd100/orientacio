@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de les Emocions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .container {
+            display: flex;
+            gap: 30px;
+            max-width: 1400px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .body-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .body-silhouette {
+            position: relative;
+            width: 300px;
+            height: 500px;
+            margin: 20px auto;
+        }
+        
+        .body-part {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        .body-part.active {
+            opacity: 0.7;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+        }
+        
+        .head { width: 80px; height: 100px; top: 10px; left: 110px; }
+        .chest { width: 120px; height: 100px; top: 110px; left: 90px; }
+        .stomach { width: 100px; height: 80px; top: 210px; left: 100px; }
+        .arms { width: 200px; height: 60px; top: 140px; left: 50px; }
+        .legs { width: 80px; height: 150px; top: 320px; left: 110px; }
+        .hands { width: 90px; height: 40px; top: 200px; left: 105px; }
+        
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .emotions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+        }
+        
+        .emotion-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+        
+        .emotion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .emotion-card.selected {
+            border-color: currentColor;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .emotion-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .emotion-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .emotion-effects {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            text-align: left;
+        }
+        
+        .info-text {
+            color: #666;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        
+        .alegria { color: #FFD700; }
+        .tristesa { color: #4A90E2; }
+        .por { color: #9B59B6; }
+        .rabia { color: #E74C3C; }
+        .ansietat { color: #F39C12; }
+        .amor { color: #E91E63; }
+    </style>
+</head>
+<body>
+    <h1>🧠 Com les Emocions Afecten el Nostre Cos</h1>
+    
+    <div class="container">
+        <div class="body-container">
+            <h2>Silhueta Humana</h2>
+            <p class="info-text">Clica les emocions per veure on actuen</p>
+            <div class="body-silhouette">
+                <svg viewBox="0 0 300 500">
+                    <!-- Cap -->
+                    <ellipse cx="150" cy="60" rx="40" ry="50" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    
+                    <!-- Coll -->
+                    <rect x="135" y="100" width="30" height="20" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    
+                    <!-- Tronc -->
+                    <ellipse cx="150" cy="180" rx="60" ry="80" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    
+                    <!-- Braços -->
+                    <ellipse cx="90" cy="160" rx="15" ry="70" fill="#e0e0e0" stroke="#666" stroke-width="2" transform="rotate(-20 90 160)"/>
+                    <ellipse cx="210" cy="160" rx="15" ry="70" fill="#e0e0e0" stroke="#666" stroke-width="2" transform="rotate(20 210 160)"/>
+                    
+                    <!-- Mans -->
+                    <circle cx="75" cy="220" r="12" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    <circle cx="225" cy="220" r="12" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    
+                    <!-- Estómac/ventre -->
+                    <ellipse cx="150" cy="260" rx="50" ry="30" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    
+                    <!-- Cames -->
+                    <ellipse cx="130" cy="370" rx="20" ry="90" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    <ellipse cx="170" cy="370" rx="20" ry="90" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    
+                    <!-- Peus -->
+                    <ellipse cx="130" cy="470" rx="15" ry="8" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                    <ellipse cx="170" cy="470" rx="15" ry="8" fill="#e0e0e0" stroke="#666" stroke-width="2"/>
+                </svg>
+                
+                <!-- Zones activables -->
+                <div class="body-part head" data-part="cap"></div>
+                <div class="body-part chest" data-part="pit"></div>
+                <div class="body-part stomach" data-part="estomac"></div>
+                <div class="body-part arms" data-part="bracos"></div>
+                <div class="body-part legs" data-part="cames"></div>
+                <div class="body-part hands" data-part="mans"></div>
+            </div>
+        </div>
+        
+        <div class="emotions-grid">
+            <div class="emotion-card alegria" data-emotion="alegria">
+                <div class="emotion-icon">😊</div>
+                <div class="emotion-name">ALEGRIA</div>
+                <div class="emotion-effects">
+                    <strong>Efectes al cos:</strong><br>
+                    • Somriure i riure<br>
+                    • Energia i vitalitat<br>
+                    • Cor més ràpid<br>
+                    • Músculs relaxats<br>
+                    • Millor digestió
+                </div>
+            </div>
+            
+            <div class="emotion-card tristesa" data-emotion="tristesa">
+                <div class="emotion-icon">😢</div>
+                <div class="emotion-name">TRISTESA</div>
+                <div class="emotion-effects">
+                    <strong>Efectes al cos:</strong><br>
+                    • Plor i llàgrimes<br>
+                    • Cansament físic<br>
+                    • Pit oprimit<br>
+                    • Moviments lents<br>
+                    • Poca energia
+                </div>
+            </div>
+            
+            <div class="emotion-card por" data-emotion="por">
+                <div class="emotion-icon">😰</div>
+                <div class="emotion-name">POR</div>
+                <div class="emotion-effects">
+                    <strong>Efectes al cos:</strong><br>
+                    • Cor accelerat<br>
+                    • Suor freda<br>
+                    • Músculs tensos<br>
+                    • Tremolors<br>
+                    • Dificultat per respirar
+                </div>
+            </div>
+            
+            <div class="emotion-card rabia" data-emotion="rabia">
+                <div class="emotion-icon">😠</div>
+                <div class="emotion-name">RÀBIA</div>
+                <div class="emotion-effects">
+                    <strong>Efectes al cos:</strong><br>
+                    • Cara roja i calenta<br>
+                    • Músculs tensos<br>
+                    • Punys tancats<br>
+                    • Respiració ràpida<br>
+                    • Pressió al pit
+                </div>
+            </div>
+            
+            <div class="emotion-card ansietat" data-emotion="ansietat">
+                <div class="emotion-icon">😟</div>
+                <div class="emotion-name">ANSIETAT</div>
+                <div class="emotion-effects">
+                    <strong>Efectes al cos:</strong><br>
+                    • "Papallones" a l'estómac<br>
+                    • Mal de panxa<br>
+                    • Sudoració<br>
+                    • Mans tremoloses<br>
+                    • Dificultat per concentrar-se
+                </div>
+            </div>
+            
+            <div class="emotion-card amor" data-emotion="amor">
+                <div class="emotion-icon">🥰</div>
+                <div class="emotion-name">AMOR</div>
+                <div class="emotion-effects">
+                    <strong>Efectes al cos:</strong><br>
+                    • "Papallones" a l'estómac<br>
+                    • Somriure involuntari<br>
+                    • Sensació càlida al pit<br>
+                    • Ganes d'abraçar<br>
+                    • Relaxació general
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const emotions = {
+            alegria: {
+                color: '#FFD700',
+                parts: ['cap', 'pit', 'bracos', 'mans']
+            },
+            tristesa: {
+                color: '#4A90E2',
+                parts: ['cap', 'pit', 'cames']
+            },
+            por: {
+                color: '#9B59B6',
+                parts: ['cap', 'pit', 'estomac', 'cames', 'mans']
+            },
+            rabia: {
+                color: '#E74C3C',
+                parts: ['cap', 'pit', 'bracos', 'mans']
+            },
+            ansietat: {
+                color: '#F39C12',
+                parts: ['cap', 'pit', 'estomac', 'mans']
+            },
+            amor: {
+                color: '#E91E63',
+                parts: ['cap', 'pit', 'estomac']
+            }
+        };
+
+        let currentEmotion = null;
+
+        document.querySelectorAll('.emotion-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const emotion = this.dataset.emotion;
+                
+                // Treure selecció anterior
+                document.querySelectorAll('.emotion-card').forEach(c => c.classList.remove('selected'));
+                document.querySelectorAll('.body-part').forEach(part => {
+                    part.classList.remove('active');
+                    part.style.backgroundColor = '';
+                });
+                
+                // Si és la mateixa emoció, desseleccionar
+                if (currentEmotion === emotion) {
+                    currentEmotion = null;
+                    return;
+                }
+                
+                // Nova selecció
+                currentEmotion = emotion;
+                this.classList.add('selected');
+                
+                // Activar parts del cos
+                const emotionData = emotions[emotion];
+                emotionData.parts.forEach(partName => {
+                    const part = document.querySelector(`[data-part="${partName}"]`);
+                    if (part) {
+                        part.classList.add('active');
+                        part.style.backgroundColor = emotionData.color;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

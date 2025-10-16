@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessió 1: Descobrint les Meves Fortaleses</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 40px;
+            text-align: center;
+            height: 100vh;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #ffeb3b;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            font-size: 1.4em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .example-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInLeft 0.8s ease-out;
+            text-align: left;
+        }
+
+        .vs-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .vs-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            width: 320px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            text-align: left;
+        }
+
+        .vs-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .good-at {
+            border: 3px solid #4caf50;
+        }
+
+        .like-to-do {
+            border: 3px solid #ff9800;
+        }
+
+        .vs {
+            font-size: 2em;
+            color: #ffeb3b;
+            font-weight: bold;
+            margin: 0 20px;
+        }
+
+        .tree-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            height: 450px;
+        }
+
+        .tree-visual {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .trunk {
+            position: absolute;
+            left: 50%;
+            bottom: 150px;
+            width: 30px;
+            height: 120px;
+            background: #8b4513;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .root {
+            position: absolute;
+            background: #8b4513;
+            border-radius: 3px;
+        }
+
+        .root1 {
+            bottom: 30px;
+            left: 30%;
+            width: 80px;
+            height: 8px;
+            transform: rotate(-25deg);
+        }
+
+        .root2 {
+            bottom: 20px;
+            left: 40%;
+            width: 60px;
+            height: 6px;
+            transform: rotate(-10deg);
+        }
+
+        .root3 {
+            bottom: 20px;
+            right: 40%;
+            width: 60px;
+            height: 6px;
+            transform: rotate(10deg);
+        }
+
+        .root4 {
+            bottom: 30px;
+            right: 30%;
+            width: 80px;
+            height: 8px;
+            transform: rotate(25deg);
+        }
+
+        .branch {
+            position: absolute;
+            background: #654321;
+            border-radius: 3px;
+        }
+
+        .branch1 {
+            top: 100px;
+            left: 20%;
+            width: 100px;
+            height: 10px;
+            transform: rotate(-30deg);
+        }
+
+        .branch2 {
+            top: 80px;
+            left: 30%;
+            width: 70px;
+            height: 8px;
+            transform: rotate(-15deg);
+        }
+
+        .branch3 {
+            top: 70px;
+            left: 48%;
+            width: 60px;
+            height: 8px;
+            transform: rotate(5deg);
+        }
+
+        .branch4 {
+            top: 80px;
+            right: 30%;
+            width: 70px;
+            height: 8px;
+            transform: rotate(15deg);
+        }
+
+        .branch5 {
+            top: 100px;
+            right: 20%;
+            width: 100px;
+            height: 10px;
+            transform: rotate(30deg);
+        }
+
+        .leaf {
+            position: absolute;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: leafGrow 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .leaf1 {
+            top: 90px;
+            left: 15%;
+            width: 40px;
+            height: 40px;
+            animation-delay: 2s;
+        }
+
+        .leaf2 {
+            top: 70px;
+            left: 30%;
+            width: 35px;
+            height: 35px;
+            animation-delay: 2.2s;
+        }
+
+        .leaf3 {
+            top: 60px;
+            left: 48%;
+            width: 38px;
+            height: 38px;
+            animation-delay: 2.4s;
+        }
+
+        .leaf4 {
+            top: 70px;
+            right: 30%;
+            width: 35px;
+            height: 35px;
+            animation-delay: 2.6s;
+        }
+
+        .leaf5 {
+            top: 90px;
+            right: 15%;
+            width: 40px;
+            height: 40px;
+            animation-delay: 2.8s;
+        }
+
+        .tree-label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .label-branches {
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(76, 175, 80, 0.9);
+            animation-delay: 3s;
+        }
+
+        .label-roots {
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(139, 69, 19, 0.9);
+            animation-delay: 3.2s;
+        }
+
+        .final-boxes {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            margin: 30px 0;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .final-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            flex: 1;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .highlight {
+            color: #ffeb3b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 40px;
+            color: #e0e0e0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes leafGrow {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vs-container {
+                flex-direction: column;
+            }
+            .vs-box {
+                width: 90%;
+            }
+            .vs {
+                transform: rotate(90deg);
+                margin: 20px 0;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .content {
+                font-size: 1.2em;
+            }
+            .final-boxes {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">5</span>
+    </div>
+
+    <!-- Slide 1: Títol -->
+    <div class="slide active" id="slide-0">
+        <h1>Descobrint les Meves Fortaleses</h1>
+        <div class="content">
+            <h2>Sessió 1: Qui sóc?</h2>
+            <p class="subtitle">
+                Avui descobrirem que <span class="highlight">tots som únics</span> i tenim
+                <span class="highlight">qualitats especials</span> que ens fan ser qui som
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Tots som únics -->
+    <div class="slide" id="slide-1">
+        <h2>Tots Tenim Qualitats Úniques</h2>
+        <div class="content">
+            <div class="example-box">
+                <p><span class="emoji">⭐</span> <strong>En Marc</strong> és molt bo explicant acudits i fent riure els companys</p>
+            </div>
+            <div class="example-box">
+                <p><span class="emoji">🎨</span> <strong>La Marta</strong> dibuixa súper bé i sempre ajuda als altres</p>
+            </div>
+            <div class="example-box">
+                <p><span class="emoji">⚽</span> <strong>L'Ahmed</strong> juga molt bé a futbol i és un bon amic</p>
+            </div>
+            <div class="example-box">
+                <p><span class="emoji">🎵</span> <strong>La Sofía</strong> té molt bon oreig per la música</p>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.3em;">
+                <span class="highlight">Cadascú té les seves qualitats especials!</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Diferència -->
+    <div class="slide" id="slide-2">
+        <h2>No És El Mateix!</h2>
+        <div class="vs-container">
+            <div class="vs-box good-at">
+                <h3><span class="emoji">💪</span> El que se'm DONA BÉ</h3>
+                <p>• Són coses que faig sense esforç</p>
+                <p>• M'hi sento segur/a</p>
+                <p>• Els altres diuen que ho faig bé</p>
+                <br>
+                <p><strong>Exemple:</strong> Sóc bo jugant a bàsquet</p>
+            </div>
+            
+            <div class="vs">VS</div>
+            
+            <div class="vs-box like-to-do">
+                <h3><span class="emoji">❤️</span> El que m'AGRADA FER</h3>
+                <p>• Són coses que em fan feliç</p>
+                <p>• Hi passo temps sense avorrir-me</p>
+                <p>• M'emocionen</p>
+                <br>
+                <p><strong>Exemple:</strong> M'encanta jugar a videojocs</p>
+            </div>
+        </div>
+        <div class="example-box">
+            <p><span class="highlight">Important:</span> Està bé que siguin coses diferents! Podem ser bons en matemàtiques però preferir dibuixar.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: L'arbre de les qualitats -->
+    <div class="slide" id="slide-3">
+        <h2>L'Arbre de les Qualitats</h2>
+        <div class="tree-container">
+            <div class="tree-visual">
+                <!-- Tronc -->
+                <div class="trunk"></div>
+                
+                <!-- Arrels -->
+                <div class="root root1"></div>
+                <div class="root root2"></div>
+                <div class="root root3"></div>
+                <div class="root root4"></div>
+                
+                <!-- Branques -->
+                <div class="branch branch1"></div>
+                <div class="branch branch2"></div>
+                <div class="branch branch3"></div>
+                <div class="branch branch4"></div>
+                <div class="branch branch5"></div>
+                
+                <!-- Fulles -->
+                <div class="leaf leaf1"></div>
+                <div class="leaf leaf2"></div>
+                <div class="leaf leaf3"></div>
+                <div class="leaf leaf4"></div>
+                <div class="leaf leaf5"></div>
+                
+                <!-- Etiquetes -->
+                <div class="tree-label label-branches">🌟 SOMNIS: El que vull aconseguir</div>
+                <div class="tree-label label-roots">💪 HABILITATS: El que se'm dona bé</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Exemple complet -->
+    <div class="slide" id="slide-4">
+        <h2>Exemple: L'Arbre de la Júlia</h2>
+        <div class="content">
+            <div class="final-boxes">
+                <div class="final-box" style="border: 3px solid #8B4513;">
+                    <h3><span class="emoji">🌳</span> ARRELS (Habilitats)</h3>
+                    <p>• Sóc bona escoltant els amics</p>
+                    <p>• Faig bé els dibuixos</p>
+                    <p>• Tinc bona memòria</p>
+                    <p>• Sé cuinar postres</p>
+                </div>
+                
+                <div class="final-box" style="border: 3px solid #4CAF50;">
+                    <h3><span class="emoji">🌟</span> BRANQUES (Somnis)</h3>
+                    <p>• Vull ser pastissera</p>
+                    <p>• M'agradaria viatjar a Japó</p>
+                    <p>• Somio tenir un gos</p>
+                </div>
+            </div>
+            
+            <div class="example-box">
+                <p style="font-size: 1.2em; text-align: center;">
+                    <span class="highlight">Ara us toca a vosaltres!</span><br>
+                    Farem el VOSTRE arbre personal amb les VOSTRES qualitats úniques
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">Següent →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 5;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            // Ocultar slide actual
+            const currentSlideElement = document.getElementById(`slide-${currentSlide}`);
+            if (currentSlideElement) {
+                currentSlideElement.classList.remove('active');
+            }
+            
+            // Actualitzar índex
+            currentSlide = n;
+            
+            // Verificar límits
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            if (currentSlide < 0) currentSlide = 0;
+            
+            // Mostrar nou slide
+            const newSlideElement = document.getElementById(`slide-${currentSlide}`);
+            if (newSlideElement) {
+                newSlideElement.classList.add('active');
+            }
+            
+            // Actualitzar comptador
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Actualitzar botons de navegació
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (prevBtn) prevBtn.disabled = currentSlide === 0;
+            if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
+            
+            console.log(`Mostrant slide ${currentSlide + 1}`);
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Navegació amb teclat
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Inicialitzar
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

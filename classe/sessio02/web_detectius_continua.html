@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detectius Emocionals - Semàfor de les Emocions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            color: #e0e6ed;
+            font-weight: 300;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+        }
+
+        .instructions h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+            font-weight: 600;
+        }
+
+        .instructions ol {
+            font-size: 1.2em;
+            color: #e0e6ed;
+            font-weight: 400;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+
+        .instructions li {
+            margin-bottom: 15px;
+            padding-left: 15px;
+        }
+
+        .situation {
+            margin-bottom: 80px;
+            scroll-margin-top: 20px;
+        }
+
+        .situation-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .situation-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #ffffff;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .situation-title {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+
+        .context-section {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            border-left: 6px solid #3498db;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .context-section h3 {
+            color: #ffffff;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .context-section h3::before {
+            content: "📖";
+            margin-right: 15px;
+            font-size: 1.3em;
+        }
+
+        .context-text {
+            font-size: 1.2em;
+            color: #e0e6ed;
+            line-height: 1.8;
+            font-weight: 400;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+
+        .questions-section {
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 40px;
+            border-left: 6px solid #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .questions-section h3 {
+            color: #ffffff;
+            font-size: 1.6em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        .questions-section h3::before {
+            content: "💭";
+            margin-right: 15px;
+            font-size: 1.3em;
+        }
+
+        .question {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+            font-weight: 500;
+            color: #ffffff;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .semaforo-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .color-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+        }
+
+        .color-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .color-verd {
+            border-left: 8px solid #27ae60;
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .color-groc {
+            border-left: 8px solid #f1c40f;
+            background: rgba(241, 196, 15, 0.1);
+        }
+
+        .color-vermell {
+            border-left: 8px solid #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .color-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .color-emoji {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+
+        .color-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .color-description {
+            font-size: 1.1em;
+            color: #e0e6ed;
+            margin-bottom: 20px;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+
+        .action-space {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 1em;
+            min-height: 80px;
+            color: #ffffff;
+            font-family: inherit;
+            resize: vertical;
+            width: 100%;
+        }
+
+        .action-space::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+        }
+
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+            margin: 80px 0;
+            border-radius: 2px;
+        }
+
+        h1, h2, h3, h4 {
+            color: #ffffff;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+
+        p, li, span {
+            color: #e0e6ed;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .color-name {
+            color: #ffffff !important;
+        }
+
+        /* Estils per a impressió PDF */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            .container {
+                max-width: none;
+                padding: 15mm;
+                margin: 0;
+            }
+
+            .header {
+                background: none !important;
+                border: none !important;
+                padding: 10mm 0;
+                margin-bottom: 15mm;
+                page-break-after: always;
+            }
+
+            .header h1 {
+                font-size: 24pt;
+                color: black !important;
+                text-shadow: none !important;
+                margin-bottom: 8pt;
+            }
+
+            .header .subtitle {
+                font-size: 14pt;
+                color: black !important;
+                text-shadow: none !important;
+            }
+
+            .instructions {
+                background: none !important;
+                border: 2px solid #333 !important;
+                padding: 15mm;
+                margin-bottom: 0;
+                page-break-after: always;
+            }
+
+            .instructions h2 {
+                font-size: 18pt;
+                color: black !important;
+                text-shadow: none !important;
+                margin-bottom: 12pt;
+            }
+
+            .instructions ol {
+                font-size: 12pt;
+                color: black !important;
+                text-shadow: none !important;
+            }
+
+            .situation {
+                page-break-before: always;
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .situation-header {
+                background: none !important;
+                border: none !important;
+                padding: 8mm 0;
+                margin-bottom: 8mm;
+                text-align: center;
+                flex-shrink: 0;
+            }
+
+            .situation-number {
+                background: #333 !important;
+                color: white !important;
+                width: 50px;
+                height: 50px;
+                font-size: 18pt;
+                margin-bottom: 8pt;
+                box-shadow: none !important;
+            }
+
+            .situation-title {
+                font-size: 18pt;
+                color: black !important;
+                text-shadow: none !important;
+                margin-bottom: 8pt;
+                font-weight: bold;
+            }
+
+            .context-section {
+                background: none !important;
+                border: 2px solid #333 !important;
+                border-left: 6px solid #333 !important;
+                padding: 8mm;
+                margin-bottom: 6mm;
+                flex-shrink: 0;
+            }
+
+            .context-section h3 {
+                color: black !important;
+                font-size: 14pt;
+                text-shadow: none !important;
+                margin-bottom: 8pt;
+                font-weight: bold;
+            }
+
+            .context-text {
+                font-size: 11pt;
+                color: black !important;
+                text-shadow: none !important;
+                line-height: 1.5;
+            }
+
+            .questions-section {
+                background: none !important;
+                border: 2px solid #666 !important;
+                border-left: 6px solid #666 !important;
+                padding: 6mm;
+                margin-bottom: 6mm;
+                flex-shrink: 0;
+            }
+
+            .questions-section h3 {
+                color: black !important;
+                font-size: 13pt;
+                text-shadow: none !important;
+                margin-bottom: 6pt;
+                font-weight: bold;
+            }
+
+            .question {
+                background: none !important;
+                border: 1px solid #666 !important;
+                border-left: 3px solid #666 !important;
+                padding: 4mm;
+                margin-bottom: 3mm;
+                color: black !important;
+                font-size: 10pt;
+                text-shadow: none !important;
+            }
+
+            .semaforo-section {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 4mm;
+                flex: 1;
+                min-height: 0;
+            }
+
+            .color-option {
+                background: none !important;
+                border: 2px solid #333 !important;
+                padding: 4mm;
+                page-break-inside: avoid;
+                height: auto;
+                min-height: 40mm;
+            }
+
+            .color-verd {
+                border-left: 6px solid #333 !important;
+            }
+
+            .color-groc {
+                border-left: 6px solid #666 !important;
+            }
+
+            .color-vermell {
+                border-left: 6px solid #999 !important;
+            }
+
+            .color-name {
+                color: black !important;
+                font-size: 12pt;
+                text-shadow: none !important;
+                font-weight: bold;
+            }
+
+            .color-description {
+                color: black !important;
+                font-size: 10pt;
+                text-shadow: none !important;
+                margin-bottom: 4mm;
+            }
+
+            .action-space {
+                background: none !important;
+                border: 1px solid #333 !important;
+                color: black !important;
+                font-size: 10pt;
+                min-height: 25mm;
+                padding: 3mm;
+            }
+
+            .section-divider {
+                display: none;
+            }
+
+            /* Ocultar elements que no es necessiten en PDF */
+            .color-emoji {
+                display: none;
+            }
+
+            /* Assegurar que cada situació comenci en una pàgina nova */
+            .situation:first-of-type {
+                page-break-before: auto;
+            }
+
+            /* Forçar salt de pàgina */
+            .situation::before {
+                content: "";
+                display: block;
+                page-break-before: always;
+                height: 0;
+            }
+
+            .situation:first-of-type::before {
+                page-break-before: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .situation-title {
+                font-size: 2em;
+            }
+
+            .semaforo-section {
+                grid-template-columns: 1fr;
+            }
+
+            .context-section, .questions-section, .color-option {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚦 DETECTIUS EMOCIONALS</h1>
+            <p class="subtitle">Descobreix com funciona el teu semàfor interior en situacions reals d'adolescents</p>
+        </div>
+
+        <div class="instructions">
+            <h2>📋 Instruccions de l'activitat</h2>
+            <ol>
+                <li><strong>Llegeix cada situació</strong> amb atenció i imagina't que et passa a tu</li>
+                <li><strong>Identifica el color del semàfor</strong> que millor representi com et sentiríes</li>
+                <li><strong>Reflexiona sobre les preguntes</strong> proposades per cada situació</li>
+                <li><strong>Escriu què faries</strong> en cada zona del semàfor (verd, groc, vermell)</li>
+                <li><strong>Comparteix les teves respostes</strong> amb el grup per al debat final</li>
+            </ol>
+        </div>
+
+        <!-- SITUACIÓ 1 -->
+        <div class="situation" id="situacio1">
+            <div class="situation-header">
+                <div class="situation-number">1</div>
+                <h2 class="situation-title">📱 Humiliació pública a xarxes socials</h2>
+            </div>
+
+            <div class="context-section">
+                <h3>Context de la situació</h3>
+                <p class="context-text">
+                    Has publicat una foto a Instagram que et feia molta il·lusió. Vas trigar molt a fer-la i creies que et quedava bé. Però els teus companys de classe han començat a comentar-la amb burles: "Què ridícul", "Qui es pensa que és?", "Patètic". Els comentaris es multipliquen i fins i tot gent que no coneixes s'hi suma. A més, algú ha fet un meme amb la teva foto que s'està compartint als Stories.
+                </p>
+            </div>
+
+            <div class="questions-section">
+                <h3>Preguntes per reflexionar</h3>
+                <div class="question">• Com et sents quan veus els comentaris i el meme?</div>
+                <div class="question">• Quina és la teva primera reacció? I el teu cos com reacciona?</div>
+                <div class="question">• Quin impacte té això en la teva autoestima?</div>
+                <div class="question">• Vols respondre als comentaris o eliminar la foto?</div>
+            </div>
+
+            <div class="semaforo-section">
+                <div class="color-option color-verd">
+                    <div class="color-header">
+                        <span class="color-emoji">🟢</span>
+                        <span class="color-name">ZONA VERDA - Tranquil</span>
+                    </div>
+                    <div class="color-description">Em sento calmat, puc pensar amb claredat i prendre bones decisions</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona verda? Escriu la teva estratègia..."></textarea>
+                </div>
+                <div class="color-option color-groc">
+                    <div class="color-header">
+                        <span class="color-emoji">🟡</span>
+                        <span class="color-name">ZONA GROGA - Alerta</span>
+                    </div>
+                    <div class="color-description">Començo a sentir-me alterat, noto canvis en el meu cos, és hora de respirar</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona groga? Com et calmaries?"></textarea>
+                </div>
+                <div class="color-option color-vermell">
+                    <div class="color-header">
+                        <span class="color-emoji">🔴</span>
+                        <span class="color-name">ZONA VERMELLA - Para!</span>
+                    </div>
+                    <div class="color-description">Emocions molt intenses, el meu cos està molt activat, primer paro després actuo</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona vermella? Recorda: primer para!"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SITUACIÓ 2 -->
+        <div class="situation" id="situacio2">
+            <div class="situation-header">
+                <div class="situation-number">2</div>
+                <h2 class="situation-title">👥 El teu grup d'amics et deixa de banda</h2>
+            </div>
+
+            <div class="context-section">
+                <h3>Context de la situació</h3>
+                <p class="context-text">
+                    Sempre havies format part d'un grup d'amics molt unit. Sortíeu junts, quedàveu els caps de setmana i teníeu un grup de WhatsApp molt actiu. Però des de fa unes setmanes notes que ja no et conviden als plans, al grup de WhatsApp gairebé no participen quan tu escrius, i quan arribes a classe els veus parlant entre ells i quan et veuen callen o canvien de tema.
+                </p>
+            </div>
+
+            <div class="questions-section">
+                <h3>Preguntes per reflexionar</h3>
+                <div class="question">• Com et sents quan notes que t'exclouen del grup?</div>
+                <div class="question">• Què penses que pot haver passat? Has fet alguna cosa?</div>
+                <div class="question">• Com afecta això la teva autoestima i confiança?</div>
+                <div class="question">• Prefereixes parlar amb ells o buscar nous amics?</div>
+            </div>
+
+            <div class="semaforo-section">
+                <div class="color-option color-verd">
+                    <div class="color-header">
+                        <span class="color-emoji">🟢</span>
+                        <span class="color-name">ZONA VERDA - Tranquil</span>
+                    </div>
+                    <div class="color-description">Em sento calmat, puc pensar amb claredat i prendre bones decisions</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona verda? Com gestionaries la situació?"></textarea>
+                </div>
+                <div class="color-option color-groc">
+                    <div class="color-header">
+                        <span class="color-emoji">🟡</span>
+                        <span class="color-name">ZONA GROGA - Alerta</span>
+                    </div>
+                    <div class="color-description">Començo a sentir-me alterat, noto canvis en el meu cos, és hora de respirar</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona groga? Com et regularies?"></textarea>
+                </div>
+                <div class="color-option color-vermell">
+                    <div class="color-header">
+                        <span class="color-emoji">🔴</span>
+                        <span class="color-name">ZONA VERMELLA - Para!</span>
+                    </div>
+                    <div class="color-description">Emocions molt intenses, el meu cos està molt activat, primer paro després actuo</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona vermella? Què faries per no actuar impulsivament?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SITUACIÓ 3 -->
+        <div class="situation" id="situacio3">
+            <div class="situation-header">
+                <div class="situation-number">3</div>
+                <h2 class="situation-title">🍺 Pressió per fer alguna cosa que no vols</h2>
+            </div>
+
+            <div class="context-section">
+                <h3>Context de la situació</h3>
+                <p class="context-text">
+                    Estàs en una festa amb amics i algú ha portat alcohol. Tot el grup està bevent i t'ofereixen. Tu dius que no, però insisteixen: "No siguis immadur", "Només és una copa", "Si no beus, no ets dels nostres", "Ets un nyigui?". La pressió va augmentant i comences a sentir-te jutjat i exclòs per no fer el que fan els altres.
+                </p>
+            </div>
+
+            <div class="questions-section">
+                <h3>Preguntes per reflexionar</h3>
+                <div class="question">• Com et sents quan et pressionen per fer alguna cosa que no vols?</div>
+                <div class="question">• Què passa per la teva ment en aquest moment de pressió?</div>
+                <div class="question">• Com gestiones la por al rebuig del grup?</div>
+                <div class="question">• Què és més important: mantenir els teus valors o ser acceptat?</div>
+            </div>
+
+            <div class="semaforo-section">
+                <div class="color-option color-verd">
+                    <div class="color-header">
+                        <span class="color-emoji">🟢</span>
+                        <span class="color-name">ZONA VERDA - Tranquil</span>
+                    </div>
+                    <div class="color-description">Em sento calmat, puc pensar amb claredat i prendre bones decisions</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona verda? Com mantindries la teva posició?"></textarea>
+                </div>
+                <div class="color-option color-groc">
+                    <div class="color-header">
+                        <span class="color-emoji">🟡</span>
+                        <span class="color-name">ZONA GROGA - Alerta</span>
+                    </div>
+                    <div class="color-description">Començo a sentir-me alterat, noto canvis en el meu cos, és hora de respirar</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona groga? Com gestionarires la pressió?"></textarea>
+                </div>
+                <div class="color-option color-vermell">
+                    <div class="color-header">
+                        <span class="color-emoji">🔴</span>
+                        <span class="color-name">ZONA VERMELLA - Para!</span>
+                    </div>
+                    <div class="color-description">Emocions molt intenses, el meu cos està molt activat, primer paro després actuo</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona vermella? Com evitaries cedir a la pressió?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SITUACIÓ 4 -->
+        <div class="situation" id="situacio4">
+            <div class="situation-header">
+                <div class="situation-number">4</div>
+                <h2 class="situation-title">🏠 Problemes familiars i incomprensió</h2>
+            </div>
+
+            <div class="context-section">
+                <h3>Context de la situació</h3>
+                <p class="context-text">
+                    Els teus pares s'estan separant i a casa l'ambient és molt tens. Discuteixen constantement, i quan arriben a casa després del treball estan de mal humor. Avui has arribat amb un 4 en un examen i quan ho expliques, la teva mare explota: "No pots fer res bé! Amb tot el que tenim al cap, ara ens faltes tu amb les notes!". El teu pare afegeix: "Sempre ets un problema més, mai ajudes".
+                </p>
+            </div>
+
+            <div class="questions-section">
+                <h3>Preguntes per reflexionar</h3>
+                <div class="question">• Com et sents quan et diuen aquestes coses en un moment tan difícil?</div>
+                <div class="question">• Com afecta la situació familiar al teu rendiment acadèmic?</div>
+                <div class="question">• Sents que és just que et culpin de tot?</div>
+                <div class="question">• A qui pots demanar ajuda en aquesta situació?</div>
+            </div>
+
+            <div class="semaforo-section">
+                <div class="color-option color-verd">
+                    <div class="color-header">
+                        <span class="color-emoji">🟢</span>
+                        <span class="color-name">ZONA VERDA - Tranquil</span>
+                    </div>
+                    <div class="color-description">Em sento calmat, puc pensar amb claredat i prendre bones decisions</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona verda? Com parlaries amb els teus pares?"></textarea>
+                </div>
+                <div class="color-option color-groc">
+                    <div class="color-header">
+                        <span class="color-emoji">🟡</span>
+                        <span class="color-name">ZONA GROGA - Alerta</span>
+                    </div>
+                    <div class="color-description">Començo a sentir-me alterat, noto canvis en el meu cos, és hora de respirar</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona groga? Com et protegiries emocionalment?"></textarea>
+                </div>
+                <div class="color-option color-vermell">
+                    <div class="color-header">
+                        <span class="color-emoji">🔴</span>
+                        <span class="color-name">ZONA VERMELLA - Para!</span>
+                    </div>
+                    <div class="color-description">Emocions molt intenses, el meu cos està molt activat, primer paro després actuo</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona vermella? Com evitaries explotar?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SITUACIÓ 5 -->
+        <div class="situation" id="situacio5">
+            <div class="situation-header">
+                <div class="situation-number">5</div>
+                <h2 class="situation-title">💕 Conflicte sentimental i gelosia</h2>
+            </div>
+
+            <div class="context-section">
+                <h3>Context de la situació</h3>
+                <p class="context-text">
+                    Fa dos mesos que surts amb algú que t'agrada molt. És la teva primera relació seriosa i estàs molt il·lusionat. Però avui has vist que ha començat a seguir molta gent nova a Instagram, likes i comentaris a fotos d'altres persones, i està molt actiu a xarxes socials amb gent que no coneixes. Quan li preguntes, diu que "només són amics" però tu notes que el seu comportament ha canviat i passa menys temps amb tu.
+                </p>
+            </div>
+
+            <div class="questions-section">
+                <h3>Preguntes per reflexionar</h3>
+                <div class="question">• Com et sents davant aquesta situació d'incertesa?</div>
+                <div class="question">• Què significa per tu aquesta primera relació?</div>
+                <div class="question">• Com gestiones els sentiments de gelosia?</div>
+                <div class="question">• Prefereixes parlar directament o investigar més?</div>
+            </div>
+
+            <div class="semaforo-section">
+                <div class="color-option color-verd">
+                    <div class="color-header">
+                        <span class="color-emoji">🟢</span>
+                        <span class="color-name">ZONA VERDA - Tranquil</span>
+                    </div>
+                    <div class="color-description">Em sento calmat, puc pensar amb claredat i prendre bones decisions</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona verda? Com parlaries amb la teva parella?"></textarea>
+                </div>
+                <div class="color-option color-groc">
+                    <div class="color-header">
+                        <span class="color-emoji">🟡</span>
+                        <span class="color-name">ZONA GROGA - Alerta</span>
+                    </div>
+                    <div class="color-description">Començo a sentir-me alterat, noto canvis en el meu cos, és hora de respirar</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona groga? Com controlaries la gelosia?"></textarea>
+                </div>
+                <div class="color-option color-vermell">
+                    <div class="color-header">
+                        <span class="color-emoji">🔴</span>
+                        <span class="color-name">ZONA VERMELLA - Para!</span>
+                    </div>
+                    <div class="color-description">Emocions molt intenses, el meu cos està molt activat, primer paro després actuo</div>
+                    <textarea class="action-space" placeholder="Què faries si estàs en zona vermella? Com evitaries actuar per gelosia?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SITUACIÓ 6 -->
+        <div class="situation" id="situacio6">
+            <div class="situation-header">
+                <div class="situation-number">6</div>
+                <h2 class="situation-title">🎓 Ansietat per al futur i expectatives</h2>
+            </div>
+
+            <div class="context-section">
+                <h3>Context de la situació</h3>
+                <p class="context-text">
+                    S'aproxima el final de curs i has de decidir què faràs després de 4t d'ESO. Els teus pares volen que facis Batxillerat perquè "és l'únic camí per tenir futur", però tu prefereixes un Grau Mitjà relacionat amb quelcom que realment t'agrada. A classe, tots els companys semblen tenir-ho clar i parlen dels seus plans amb seguretat. Tu et sents perdut, pressionat i amb por de decebre els pares, però també de traicionar-te a tu mateix.
+                </p>
+            </div>
+
+            <div class="questions-section">
+                <h3>Preguntes per reflexionar</h3>
+                <div class="question">• Com et sents quan has de prendre decisions tan importants?</div>
+                <div class="question">• Què passa quan les expectatives dels altres no coincideixen amb les teves?</div>
+                <div class="question">• Com gestiones la pressió sobre el teu futur?</div>
+                <div class="question">• Qui pot ajudar-te a prendre aquesta decisió?</div>
+            </div>
+
+            <div class="semaforo-section">
+                <div class="color-option color-verd">
+                    <div class="color-header">
+                        <span class="color-emoji">🟢</span>
+                        <span class="color-name">ZONA VERDA - Tranquil</span>
+                    </div>
+                    <div class="color-description">Em sento calmat, puc pensar amb claredat i prendre bones decisions

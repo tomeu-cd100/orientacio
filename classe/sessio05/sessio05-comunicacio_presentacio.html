@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parlant i Escoltant de Veritat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            padding: 60px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        .slide-title {
+            font-size: 3.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .slide-content {
+            font-size: 1.4em;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .highlight-box {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .rules-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .rule-card {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .rule-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .rule-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+
+        .body-language-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .body-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .body-emoji {
+            font-size: 2.5em;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .situations-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .situation-card {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+
+        .situation-card:hover {
+            transform: scale(1.05);
+        }
+
+        .examples-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .example-card {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .example-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+
+        .conclusion-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .learned-section, .challenge-section {
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-indicators {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Backgrounds específics per cada slide */
+        .slide:nth-child(1) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .slide:nth-child(2) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .slide:nth-child(3) { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .slide:nth-child(4) { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+        .slide:nth-child(5) { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+        .slide:nth-child(6) { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+
+        .interactive-prompt {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .vs-comparison {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .vs-item {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .vs-divider {
+            font-size: 3em;
+            font-weight: bold;
+            color: #FFD700;
+            margin: 0 20px;
+        }
+
+        @media (max-width: 768px) {
+            .slide-title { font-size: 2.5em; }
+            .slide-content { font-size: 1.2em; }
+            .rules-container, .situations-container, .examples-container { 
+                grid-template-columns: 1fr; 
+            }
+            .conclusion-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 2: Quan escoltes vs quan només sents -->
+        <div class="slide active">
+            <div class="slide-number">2/7</div>
+            <h1 class="slide-title">El Misteri: Per què et repeteixen sempre el mateix?</h1>
+            <div class="slide-content">
+                <div class="vs-comparison">
+                    <div class="vs-item">
+                        <div class="highlight-box">
+                            <h3 style="color: #FFD700; margin-bottom: 15px;">👂 SENTIR</h3>
+                            <p>És automàtic, com quan sona el mòbil mentre estudies</p>
+                        </div>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="vs-item">
+                        <div class="highlight-box">
+                            <h3 style="color: #90EE90; margin-bottom: 15px;">💚 ESCOLTAR</h3>
+                            <p>És decidir posar atenció, com quan escoltes la teva cançó favorita</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>La realitat:</strong> "Mare, ja t'he dit que sí!" (però no has escoltat res)</p>
+                    <p><strong>La diferència:</strong> Escoltar és com tenir superpowers per entendre la gent</p>
+                </div>
+                <div class="interactive-prompt">
+                    💡 ACTIVITAT: Tanca els ulls 30 segons. Què sents? Ara obre'ls i escolta només la meva veu. Nota la diferència?
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Les 3 regles d'or -->
+        <div class="slide">
+            <div class="slide-number">3/7</div>
+            <h1 class="slide-title">Els Trucs que Mai Ningú t'ha Explicat</h1>
+            <div class="slide-content">
+                <div class="rules-container">
+                    <div class="rule-card">
+                        <span class="rule-icon">👀</span>
+                        <div class="rule-title">MIRAR ALS ULLS = CONNECTAR</div>
+                        <p>Els ulls són la WiFi de les emocions. No fa falta que sigui incòmode, només honest</p>
+                    </div>
+                    <div class="rule-card">
+                        <span class="rule-icon">🤐</span>
+                        <div class="rule-title">NO INTERROMPRE = RESPECTAR</div>
+                        <p>Quan talles, el que dius és "El que penso jo és més important". Esperar el torn = demostrar que t'importa</p>
+                    </div>
+                    <div class="rule-card">
+                        <span class="rule-icon">❓</span>
+                        <div class="rule-title">PREGUNTAR = INTERESSAR-SE</div>
+                        <p>"No t'he entès, m'ho pots explicar d'una altra manera?" És millor preguntar que fer-te l'entès</p>
+                    </div>
+                </div>
+                <div class="interactive-prompt">
+                    🎭 DINÀMICA: Role-play de 2 minuts per parelles practicant les regles
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: El teu cos també parla -->
+        <div class="slide">
+            <div class="slide-number">4/7</div>
+            <h1 class="slide-title">Quan les teves mans diuen el contrari que la teva boca</h1>
+            <div class="slide-content">
+                <h2 style="margin-bottom: 30px; color: #FFD700;">QUÈ DIU EL TEU COS QUAN:</h2>
+                <div class="body-language-grid">
+                    <div class="body-item">
+                        <span class="body-emoji">🙅‍♂️</span>
+                        <strong>Creues els braços:</strong> "No m'interessa" o "Estic defensiu"
+                    </div>
+                    <div class="body-item">
+                        <span class="body-emoji">📱</span>
+                        <strong>Mires el mòbil:</strong> "Això és avorrit"
+                    </div>
+                    <div class="body-item">
+                        <span class="body-emoji">🏃‍♂️</span>
+                        <strong>T'adreeces cap endavant:</strong> "M'interessa el que dius"
+                    </div>
+                    <div class="body-item">
+                        <span class="body-emoji">😊</span>
+                        <strong>Somrius amb els ulls:</strong> "Estic connectat/da"
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p><strong>LA CLAU:</strong> El teu cos i les teves paraules han d'anar junts</p>
+                    <p><strong>EXEMPLE REAL:</strong> "Sí, t'escolto" (mentre mires Instagram) <span style="color: #ff6b6b;">VS</span> "Sí, t'escolto" (guardant el mòbil i mirant)</p>
+                </div>
+                <div class="interactive-prompt">
+                    🎪 ACTIVITAT: Digueu "Estic súper content" amb cara trista. Què passa?
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Situacions reals -->
+        <div class="slide">
+            <div class="slide-number">5/7</div>
+            <h1 class="slide-title">Stop! Reconeixeu aquestes situacions?</h1>
+            <div class="slide-content">
+                <div class="situations-container">
+                    <div class="situation-card">
+                        <h3>🎧 SITUACIÓ 1</h3>
+                        <p>Els pares et parlen i tu amb els auriculars</p>
+                    </div>
+                    <div class="situation-card">
+                        <h3>💭 SITUACIÓ 2</h3>
+                        <p>L'amic/ga t'explica un problema i tu ja estàs pensant què li aconsellaràs</p>
+                    </div>
+                    <div class="situation-card">
+                        <h3>📚 SITUACIÓ 3</h3>
+                        <p>El/la profe explica i tu estàs pensant en els plans del cap de setmana</p>
+                    </div>
+                    <div class="situation-card">
+                        <h3>😂 SITUACIÓ 4</h3>
+                        <p>Algú et fa una broma i respons sense pensar</p>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <h2 style="color: #FFD700;">LA PREGUNTA:</h2>
+                    <p style="font-size: 1.3em;">Com canviaria la situació si apliquéssim les regles d'or?</p>
+                </div>
+                <div class="interactive-prompt">
+                    👥 DINÀMICA: En grups de 3, escolliu una situació i representeu-la MAL i després BÉ
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: El superpoder en acció -->
+        <div class="slide">
+            <div class="slide-number">6/7</div>
+            <h1 class="slide-title">Quan ho fas bé, màgia pura!</h1>
+            <div class="slide-content">
+                <div class="examples-container">
+                    <div class="example-card">
+                        <div class="example-title">✨ EXEMPLE 1</div>
+                        <p>Maria va escoltar de veritat quan el seu pare li explicava per què estava preocupat pel treball. <strong>Resultat:</strong> van trobar una solució junts.</p>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-title">💫 EXEMPLE 2</div>
+                        <p>Ahmed va aplicar les regles d'or amb un amic que estava trist. L'amic li va dir: <em>"Ets l'única persona que m'entén."</em></p>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-title">⭐ EXEMPLE 3</div>
+                        <p>Carla va canviar el seu llenguatge corporal a classe. La profe va notar el canvi i la va felicitar.</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="background: linear-gradient(45deg, #FFD700, #FFA500); color: #333;">
+                    <h2 style="margin-bottom: 20px;">🎯 EL MISSATGE</h2>
+                    <p style="font-size: 1.5em; font-weight: bold;">Petit canvi = gran impacte</p>
+                </div>
+                <div class="interactive-prompt">
+                    💬 DINÀMICA: Compteu una vegada que us heu sentit realment escoltats. Com us va fer sentir?
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Conclusió -->
+        <div class="slide">
+            <div class="slide-number">7/7</div>
+            <h1 class="slide-title">El teu compromís amb tu mateix/a</h1>
+            <div class="slide-content">
+                <div class="conclusion-content">
+                    <div class="learned-section">
+                        <h2 style="color: #FFD700; margin-bottom: 20px;">📚 EL QUE HEM APRÈS:</h2>
+                        <ul style="text-align: left; line-height: 1.8;">
+                            <li>✅ Escoltar és diferent de sentir</li>
+                            <li>✅ Tres regles simples poden canviar les teves relacions</li>
+                            <li>✅ El teu cos parla, assegura't que digui el que vols</li>
+                        </ul>
+                    </div>
+                    <div class="challenge-section">
+                        <h2 style="color: #FFD700; margin-bottom: 20px;">🎯 EL TEU REPTE PER AQUESTA SETMANA:</h2>
+                        <ul style="text-align: left; line-height: 1.8;">
+                            <li>🎲 Escull UNA persona important per a tu</li>
+                            <li>💪 Aplica les regles d'or en UNA conversa</li>
+                            <li>👀 Observa què passa</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="background: linear-gradient(45deg, #667eea, #764ba2);">
+                    <h2 style="margin-bottom: 20px;">💎 RECORDATORI</h2>
+                    <p style="font-size: 1.4em; font-weight: bold;">"No es tracta de ser perfecte, es tracta de ser real"</p>
+                </div>
+                <div class="interactive-prompt">
+                    📝 DINÀMICA FINAL: Escriviu en un paper el nom d'una persona amb qui voleu millorar la comunicació. No cal que ho compartiu, és el vostre compromís privat.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Següent →</button>
+    </div>
+
+    <!-- Slide indicators -->
+    <div class="slide-indicators">
+        <span class="indicator active" onclick="currentSlide(1)"></span>
+        <span class="indicator" onclick="currentSlide(2)"></span>
+        <span class="indicator" onclick="currentSlide(3)"></span>
+        <span class="indicator" onclick="currentSlide(4)"></span>
+        <span class="indicator" onclick="currentSlide(5)"></span>
+        <span class="indicator" onclick="currentSlide(6)"></span>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        const totalSlides = 6;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            if (n > totalSlides) { slideIndex = 1; }
+            if (n < 1) { slideIndex = totalSlides; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[slideIndex - 1].classList.add('active');
+            indicators[slideIndex - 1].classList.add('active');
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = slideIndex === 1;
+            document.getElementById('nextBtn').disabled = slideIndex === totalSlides;
+        }
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        showSlide(slideIndex);
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.rule-card, .situation-card, .example-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'slideIn 0.6s ease-out forwards';
+            });
+        });
+    </script>
+</body>
+</html>
