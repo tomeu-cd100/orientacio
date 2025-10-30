@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git restore:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git reset:*)",
+      "Bash(git show origin/main: --format=tree)",
+      "Bash(git checkout:*)",
+      "Bash(git diff-tree:*)",
+      "Read(//c/Users/briera2/Documents/**)",
+      "Bash(git mv:*)",
+      "Bash(git log:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
