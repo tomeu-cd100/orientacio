@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Meu Diari d'Empatia - Activitat Individual</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 5px solid #667eea;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .header .emoji {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .instructions {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 8px solid #ff6b6b;
+        }
+
+        .instructions h2 {
+            color: #d84315;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .instructions li {
+            font-size: 1.2em;
+            margin: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .instructions li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border-left: 8px solid #667eea;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title .emoji {
+            font-size: 1.5em;
+        }
+
+        .question-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .writing-space {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 3px dashed #667eea;
+            border-radius: 10px;
+            font-family: inherit;
+            resize: vertical;
+            line-height: 2;
+            background: #fafafa;
+        }
+
+        .writing-space:focus {
+            outline: none;
+            border-color: #764ba2;
+            background: white;
+        }
+
+        .helper-text {
+            font-size: 1.1em;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-left: 10px;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #2196f3;
+        }
+
+        .example-box .label {
+            font-weight: bold;
+            color: #1565c0;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .example-box .text {
+            font-size: 1.1em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .reflection-prompts {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .reflection-prompts h4 {
+            color: #e65100;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .reflection-prompts ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reflection-prompts li {
+            font-size: 1.1em;
+            margin: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .reflection-prompts li:before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+        }
+
+        .table-activity {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .table-activity th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            text-align: left;
+        }
+
+        .table-activity th:first-child {
+            border-top-left-radius: 10px;
+        }
+
+        .table-activity th:last-child {
+            border-top-right-radius: 10px;
+        }
+
+        .table-activity td {
+            background: white;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .table-activity input[type="text"],
+        .table-activity textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-family: inherit;
+            background: #fafafa;
+        }
+
+        .table-activity input[type="text"]:focus,
+        .table-activity textarea:focus {
+            outline: none;
+            border-color: #764ba2;
+            background: white;
+        }
+
+        .emoji-scale {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .emoji-option {
+            text-align: center;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .emoji-option:hover {
+            background: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        .emoji-option .emoji {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .emoji-option .label {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .final-reflection {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .final-reflection h2 {
+            color: white;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .final-reflection .message {
+            font-size: 1.3em;
+            color: #333;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+
+        .print-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 20px auto;
+            display: block;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .print-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .print-button {
+                display: none;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .section-title {
+                font-size: 1.5em;
+            }
+            .table-activity {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 EL MEU DIARI D'EMPATIA</h1>
+            <div class="subtitle">Una activitat per descobrir-me i entendre millor els altres</div>
+            <div class="emoji">💭🤝💙</div>
+        </div>
+
+        <div class="instructions">
+            <h2>📋 Com fer aquesta activitat?</h2>
+            <ul>
+                <li><strong>Troba un lloc tranquil</strong> on puguis pensar sense distraccions</li>
+                <li><strong>Sigues honest/a</strong> - ningú jutjarà les teves respostes</li>
+                <li><strong>No hi ha respostes bones o dolentes</strong> - el que tu penses és vàlid</li>
+                <li><strong>Pren-te el teu temps</strong> - no és una cursa, és una reflexió</li>
+                <li><strong>Si una pregunta és difícil</strong>, escriu el que puguis i continua</li>
+                <li><strong>Això és només per a tu</strong> (o per compartir si tu vols)</li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓ 1: CONEIXENT-ME A MI MATEIX/A -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🪞</span>
+                <span>PART 1: Coneixent-me a mi mateix/a</span>
+            </div>
+
+            <div class="question-box">
+                <div class="question">1. Quan estic content/a, com ho demostro?</div>
+                <textarea class="writing-space" placeholder="Escriu aquí... Per exemple: Somric molt, parlo més, escolto música..."></textarea>
+                <div class="helper-text">💡 Pensa en l'última vegada que vas estar molt content/a. Què vas fer?</div>
+            </div>
+
+            <div class="question-box">
+                <div class="question">2. Quan estic trist/a o enfadat/a, què necessito?</div>
+                <textarea class="writing-space" placeholder="Escriu aquí... Per exemple: Estar sol/a, parlar amb algú, escoltar música..."></textarea>
+                <div class="helper-text">💡 No tothom necessita el mateix quan està malament. Tu què necessites?</div>
+            </div>
+
+            <div class="question-box">
+                <div class="question">3. Hi ha alguna cosa que m'agradaria que els altres entenguessin sobre mi?</div>
+                <textarea class="writing-space" placeholder="Escriu aquí... Per exemple: Que quan estic callat/da no és que estigui enfadat/da, només necessito temps..."></textarea>
+                <div class="helper-text">💡 Què voldries que els altres sabessin per entendre't millor?</div>
+            </div>
+
+            <div class="question-box">
+                <div class="question">4. Marca amb una X com et sents AVUI:</div>
+                <div class="emoji-scale">
+                    <div class="emoji-option">
+                        <span class="emoji">😄</span>
+                        <span class="label">Molt bé</span>
+                        <input type="checkbox" style="margin-top: 10px;">
+                    </div>
+                    <div class="emoji-option">
+                        <span class="emoji">🙂</span>
+                        <span class="label">Bé</span>
+                        <input type="checkbox" style="margin-top: 10px;">
+                    </div>
+                    <div class="emoji-option">
+                        <span class="emoji">😐</span>
+                        <span class="label">Normal</span>
+                        <input type="checkbox" style="margin-top: 10px;">
+                    </div>
+                    <div class="emoji-option">
+                        <span class="emoji">😔</span>
+                        <span class="label">No gaire bé</span>
+                        <input type="checkbox" style="margin-top: 10px;">
+                    </div>
+                    <div class="emoji-option">
+                        <span class="emoji">😢</span>
+                        <span class="label">Malament</span>
+                        <input type="checkbox" style="margin-top: 10px;">
+                    </div>
+                </div>
+                <textarea class="writing-space" style="min-height: 80px;" placeholder="Per què et sents així avui?"></textarea>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 2: RECORDANT MOMENTS IMPORTANTS -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">💫</span>
+                <span>PART 2: Recordant moments importants</span>
+            </div>
+
+            <div class="question-box">
+                <div class="question">5. Recorda un moment en què algú t'ha entès de veritat</div>
+                
+                <div class="example-box">
+                    <div class="label">📌 Exemple:</div>
+                    <div class="text">"Vaig suspendre un examen i em sentia fatal. El meu amic Marc no em va dir 'has d'estudiar més', només em va dir 'entenc que et sentis així' i es va quedar amb mi un rato. Això em va ajudar molt."</div>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <strong style="font-size: 1.2em; color: #667eea;">Ara tu:</strong>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Què va passar?</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder="Explica la situació..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Qui t'ha entès?</label>
+                    <textarea class="writing-space" style="min-height: 60px;" placeholder="Un amic/ga, familiar, professor/a..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Què va fer o dir aquesta persona?</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder="Va escoltar, em va abraçar, va estar amb mi..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Com et vas sentir?</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder="Alleujat/da, comprès/a, menys sol/a..."></textarea>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <div class="question">6. Recorda un moment en què TU has entès a algú</div>
+                
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Què li passava a aquesta persona?</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder="Estava trist/a, enfadat/da, preocupat/da..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Què vas fer per ajudar-la?</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder="Vaig escoltar, vaig fer-li companyia, li vaig preguntar com se sentia..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Com et vas sentir tu quan vas poder ajudar?</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder="Bé perquè podia ajudar, útil, important..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 3: LES PERSONES AL MEU VOLTANT -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">👥</span>
+                <span>PART 3: Les persones al meu voltant</span>
+            </div>
+
+            <div class="question-box">
+                <div class="question">7. Mapa de persones importants per a mi</div>
+                <p style="font-size: 1.1em; margin-bottom: 20px;">Omple aquesta taula amb les persones que són importants per a tu:</p>
+
+                <table class="table-activity">
+                    <thead>
+                        <tr>
+                            <th>Nom de la persona</th>
+                            <th>Què fa que aquesta persona sigui important?</th>
+                            <th>Com puc demostrar-li que m'importa?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" placeholder="Ex: La meva mare"></td>
+                            <td><textarea rows="2" placeholder="Ex: M'escolta quan ho necessito"></textarea></td>
+                            <td><textarea rows="2" placeholder="Ex: Ajudar-la a casa, parlar amb ella"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" placeholder=""></td>
+                            <td><textarea rows="2" placeholder=""></textarea></td>
+                            <td><textarea rows="2" placeholder=""></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" placeholder=""></td>
+                            <td><textarea rows="2" placeholder=""></textarea></td>
+                            <td><textarea rows="2" placeholder=""></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" placeholder=""></td>
+                            <td><textarea rows="2" placeholder=""></textarea></td>
+                            <td><textarea rows="2" placeholder=""></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="question-box">
+                <div class="question">8. Si pogués fer una pregunta a algú que conec, seria...</div>
+                
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">A qui li faria la pregunta?</label>
+                    <textarea class="writing-space" style="min-height: 60px;" placeholder="Un amic/ga, familiar, algú de classe..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Quina pregunta li faria?</label>
+                    <textarea class="writing-space" style="min-height: 80px;" placeholder="Per què estàs trist/a últimament? Com et puc ajudar?..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Per què vull fer-li aquesta pregunta?</label>
+                    <textarea class="writing-space" style="min-height: 80px;" placeholder="Perquè m'importa, perquè vull entendre'l/la millor..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 4: SITUACIONS REALS -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🎭</span>
+                <span>PART 4: Posant-me a la pell d'altri</span>
+            </div>
+
+            <div class="question-box">
+                <div class="question">9. Llegeix aquesta situació i respon:</div>
+                
+                <div class="example-box">
+                    <div class="label">📖 SITUACIÓ:</div>
+                    <div class="text">
+                        La teva amiga Laura últimament està molt callada. Abans reia molt i parlava amb tothom, però ara es queda sola al pati i no participa gaire a classe. Un dia la veus plorant al lavabo.
+                    </div>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Com creus que se sent Laura?</label>
+                    <textarea class="writing-space" style="min-height: 80px;" placeholder="Trista, sola, preocupada..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Què podria estar passant-li?</label>
+                    <textarea class="writing-space" style="min-height: 80px;" placeholder="Problemes a casa, amb amics, amb els estudis..."></textarea>
+                    <div class="helper-text">💡 No cal saber-ho amb seguretat, només imagina què podria ser</div>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Què li diries o faries per ajudar-la?</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder=""></textarea>
+                    
+                    <div class="reflection-prompts">
+                        <h4>💡 Idees que et poden ajudar:</h4>
+                        <ul>
+                            <li>"Ei Laura, com et sents?"</li>
+                            <li>"He vist que estàs diferent últimament, vols parlar?"</li>
+                            <li>"Estic aquí si necessites alguna cosa"</li>
+                            <li>Quedar-me amb ella en silenci</li>
+                            <li>Fer-li companyia al pati</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Has viscut alguna vegada una situació semblant? Explica-la:</label>
+                    <textarea class="writing-space" style="min-height: 100px;" placeholder="Quan jo estava trist/a... Quan un amic/ga meva..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓ 5: EL MEU COMPROMÍS -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🎯</span>
+                <span>PART 5: El meu compromís amb l'empatia</span>
+            </div>
+
+            <div class="question-box">
+                <div class="question">10. Aquesta setmana, em comprometo a...</div>
+                
+                <div class="reflection-prompts">
+                    <h4>💡 Tria UNA o dues accions que pots fer aquesta setmana:</h4>
+                    <ul>
+                        <li>Fer una pregunta màgica a algú ("Com et sents?" o "Què necessites?")</li>
+                        <li>Escoltar algú sense mirar el mòbil</li>
+                        <li>Preguntar a algú com li ha anat el dia</li>
+                        <li>Ajudar algú que ho necessiti</li>
+                        <li>Donar les gràcies a algú que m'ha ajudat</li>
+                        <li>Fixar-me més en com estan les persones al meu voltant</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <label style="font-size: 1.2em; font-weight: bold; display: block; margin-bottom: 8px; color: #667eea;">✍️ El meu compromís és:</label>
+                    <textarea class="writing-space" style="min-height: 120px; border: 3px solid #667eea;" placeholder="Aquesta setmana faré..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Amb qui ho faré?</label>
+                    <textarea class="writing-space" style="min-height: 60px;" placeholder="Amb un amic/ga, familiar..."></textarea>
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <label style="font-size: 1.1em; font-weight: bold; display: block; margin-bottom: 8px;">Quan ho faré? (dia i moment)</label>
+                    <textarea class="writing-space" style="min-height: 60px;" placeholder="Dilluns al pati, dimecres després de classe..."></textarea>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <div class="question">11. Què he après avui sobre l'empatia?</div>
+                <textarea class="writing-space" style="min-height: 150px;" placeholder="Escriu tot el que se t'acut... No hi ha respostes dolentes!"></textarea>
+            </div>
+
+            <div class="question-box">
+                <div class="question">12. Com em sento després de fer aquesta activitat?</div>
+                <textarea class="writing-space" style="min-height: 120px;" placeholder="Content/a, reflexiu/va, motivat/da, cansat/da..."></textarea>
+            </div>
+        </div>
+
+        <!-- REFLEXIÓ FINAL -->
+        <div class="final-reflection">
+            <h2>🌟 Felicitats! Has acabat el teu Diari d'Empatia</h2>
+            <div class="message">
+                <strong>Recorda:</strong> L'empatia no és només una paraula, és una forma de viure i de relacionar-te amb els altres.
+                <br><br>
+                Cada vegada que escultes, cada vegada que intentes entendre, cada vegada que estàs present per algú... estàs fent del món un lloc millor.
+                <br><br>
+                <strong style="color: #667eea; font-size: 1.3em;">Tu tens el poder de fer que els altres se sentin entesos. I això és màgic. ✨</strong>
+            </div>
+        </div>
+
+        <button class="print-button" onclick="window.print()">🖨️ Imprimir el meu Diari</button>
+    </div>
+
+    <script>
+        // Auto-save to localStorage
+        const textareas = document.querySelectorAll('textarea, input[type="text"]');
+        
+        textareas.forEach((element, index) => {
+            // Load saved content
+            const savedContent = localStorage.getItem(`diary_${index}`);
+            if (savedContent) {
+                element.value = savedContent;
+            }
+
+            // Save on change
+            element.addEventListener('input', function() {
+                localStorage.setItem(`diary_${index}`, this.value);
+            });
+        });
+
+        // Handle checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox, index) => {
+            const savedState = localStorage.getItem(`checkbox_${index}`);
+            if (savedState === 'true') {
+                checkbox.checked = true;
+            }
+
+            checkbox.addEventListener('change', function() {
+                // Uncheck all other emotion checkboxes
+                const allEmotionCheckboxes = checkbox.closest('.emoji-scale')?.querySelectorAll('input[type="checkbox"]');
+                if (allEmotionCheckboxes) {
+                    allEmotionCheckboxes.forEach(cb => {
+                        if (cb !== checkbox) cb.checked = false;
+                    });
+                }
+                localStorage.setItem(`checkbox_${index}`, this.checked);
+            });
+        });
+    </script>
+</body>
+</html>
