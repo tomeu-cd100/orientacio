@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entendre'ns Millor - El poder de posar-se a la pell de l'altre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            min-height: 80vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 60px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide 1 - Portada */
+        .slide-1 {
+            background: linear-gradient(135deg, #89CFF0 0%, #B19CD9 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .slide-1 h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .slide-1 h2 {
+            font-size: 2em;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .slide-1 .icon-hands {
+            font-size: 6em;
+            margin: 30px 0;
+        }
+
+        .slide-1 p {
+            font-size: 1.5em;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .slide-1 .highlight {
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        /* Slide 2 - Què és l'empatia */
+        .slide-2 h1 {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 1.8em;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .comparison-item {
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .comparison-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .comparison-item h3 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .situation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+        }
+
+        .without-empathy {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+
+        .with-empathy {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+
+        .emoji {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+
+        .final-note {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        /* Slide 3 - Preguntes màgiques */
+        .slide-3 h1 {
+            font-size: 3em;
+            color: #764ba2;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .magic-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .question-box {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .question-tips {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .question-tips p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .comic-strip {
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+            justify-content: center;
+        }
+
+        .comic-panel {
+            background: white;
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            max-width: 300px;
+            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .comic-panel .emoji {
+            font-size: 3em;
+        }
+
+        .comic-panel p {
+            font-size: 1.1em;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* Slide 4 - Activitat */
+        .slide-4 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .slide-4 h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .activity-intro {
+            font-size: 1.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .step-box {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 20px;
+        }
+
+        .step-content {
+            font-size: 1.3em;
+            line-height: 1.8;
+        }
+
+        .role-item {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .tips-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .tips-box p {
+            font-size: 1.2em;
+            margin: 8px 0;
+            color: #333;
+        }
+
+        /* Slide 5 - Posada en comú */
+        .slide-5 h1 {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .reflection-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .reflection-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .reflection-card h2 {
+            font-size: 1.8em;
+            color: #d84315;
+            margin-bottom: 20px;
+        }
+
+        .reflection-card ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .reflection-card li {
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .reflection-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .highlight-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        /* Slide 6 - Conclusió */
+        .slide-6 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #333;
+        }
+
+        .slide-6 h1 {
+            font-size: 3.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .key-points {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .key-point {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            font-size: 1.3em;
+            line-height: 1.6;
+        }
+
+        .key-point .icon {
+            font-size: 2em;
+            margin-right: 20px;
+            min-width: 50px;
+        }
+
+        .final-message {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #f5576c;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-message {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            font-size: 1.4em;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .closing-message {
+            text-align: center;
+            font-size: 1.6em;
+            margin-top: 30px;
+            color: white;
+            font-style: italic;
+        }
+
+        /* Navegació */
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: #667eea;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+                width: 95%;
+            }
+
+            .slide-1 h1 {
+                font-size: 2.5em;
+            }
+
+            .slide-1 h2 {
+                font-size: 1.5em;
+            }
+
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+
+            .comic-strip {
+                flex-direction: column;
+            }
+
+            .comic-panel {
+                max-width: 100%;
+            }
+
+            .navigation {
+                bottom: 20px;
+                gap: 10px;
+            }
+
+            .nav-button {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">6</span>
+    </div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Portada -->
+        <div class="slide slide-1 active">
+            <h1>ENTENDRE'NS MILLOR</h1>
+            <h2>El poder de posar-se a la pell de l'altre</h2>
+            <div class="icon-hands">🤝</div>
+            <p>Avui aprendrem un <span class="highlight">superpoder</span> que canviarà les teves relacions: <span class="highlight">l'empatia</span></p>
+        </div>
+
+        <!-- Slide 2: Què és l'empatia -->
+        <div class="slide slide-2">
+            <h1>QUÈ ÉS L'EMPATIA? (SENSE ROTLLOS)</h1>
+            
+            <div class="definition-box">
+                🧠 <strong>EMPATIA</strong> = Posar-te a la pell de l'altre
+            </div>
+
+            <div style="font-size: 1.4em; margin: 30px 0; text-align: center;">
+                <p><strong style="color: #f44336;">📌 NO</strong> és estar d'acord amb tot el que fa l'altre</p>
+                <p><strong style="color: #4caf50;">✅ SÍ</strong> que és entendre <em>per què</em> se sent així</p>
+            </div>
+
+            <div class="comparison-table">
+                <div class="comparison-item situation">
+                    <div class="emoji">😠</div>
+                    <h3>SITUACIÓ</h3>
+                    <p>El teu col·lega està enfadat</p>
+                </div>
+                <div class="comparison-item without-empathy">
+                    <div class="emoji">🙄</div>
+                    <h3>SENSE EMPATIA</h3>
+                    <p>"Quina mania que té!"</p>
+                </div>
+                <div class="comparison-item with-empathy">
+                    <div class="emoji">🤔</div>
+                    <h3>AMB EMPATIA</h3>
+                    <p>"Potser ha tingut un mal dia..."</p>
+                </div>
+
+                <div class="comparison-item situation">
+                    <div class="emoji">😢</div>
+                    <h3>SITUACIÓ</h3>
+                    <p>La teva amiga no parla</p>
+                </div>
+                <div class="comparison-item without-empathy">
+                    <div class="emoji">😤</div>
+                    <h3>SENSE EMPATIA</h3>
+                    <p>"Passa de mi"</p>
+                </div>
+                <div class="comparison-item with-empathy">
+                    <div class="emoji">💭</div>
+                    <h3>AMB EMPATIA</h3>
+                    <p>"Li pregunto si està bé"</p>
+                </div>
+
+                <div class="comparison-item situation">
+                    <div class="emoji">😤</div>
+                    <h3>SITUACIÓ</h3>
+                    <p>Un familiar et renya</p>
+                </div>
+                <div class="comparison-item without-empathy">
+                    <div class="emoji">😡</div>
+                    <h3>SENSE EMPATIA</h3>
+                    <p>"M'està tocant els nassos"</p>
+                </div>
+                <div class="comparison-item with-empathy">
+                    <div class="emoji">💡</div>
+                    <h3>AMB EMPATIA</h3>
+                    <p>"Potser està preocupat per mi"</p>
+                </div>
+            </div>
+
+            <div class="final-note">
+                <strong>Entendre ≠ Justificar.</strong> Pots entendre com se sent algú sense estar d'acord amb el que fa.
+            </div>
+        </div>
+
+        <!-- Slide 3: Preguntes màgiques -->
+        <div class="slide slide-3">
+            <h1>LES 2 PREGUNTES QUE HO CANVIEN TOT</h1>
+            
+            <p style="font-size: 1.4em; text-align: center; margin: 30px 0;">
+                Quan algú està malament (o tu mateix estàs malament), aquestes dues preguntes són <strong style="color: #FFD700;">or</strong>:
+            </p>
+
+            <div class="magic-questions">
+                <div class="question-box">
+                    <div class="question-number">1️⃣ Primera pregunta màgica:</div>
+                    <div class="question-text">"COM ET SENTS?"</div>
+                    <div class="question-tips">
+                        <p>💬 Aquesta pregunta obre portes.</p>
+                        <p>💡 Demostra que t'importa de veritat.</p>
+                        <p>⚠️ <strong>Important:</strong> Escolta la resposta sense jutjar.</p>
+                    </div>
+                </div>
+
+                <div class="question-box" style="background: linear-gradient(135deg, #FFA500 0%, #FF6347 100%);">
+                    <div class="question-number">2️⃣ Segona pregunta màgica:</div>
+                    <div class="question-text">"QUÈ NECESSITES?"</div>
+                    <div class="question-tips">
+                        <p>💬 Aquesta pregunta ofereix ajuda real.</p>
+                        <p>💡 Demostra que vols fer alguna cosa.</p>
+                        <p>⚠️ <strong>Important:</strong> No tothom sap respondre això. No passa res.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; font-size: 2em; margin: 40px 0; color: #764ba2;">Exemple pràctic:</h2>
+
+            <div class="comic-strip">
+                <div class="comic-panel">
+                    <div class="emoji">😞</div>
+                    <p><strong>Personatge A:</strong> (cara trista)</p>
+                    <p><strong>Personatge B:</strong> "Ei, com et sents?"</p>
+                </div>
+                <div class="comic-panel">
+                    <div class="emoji">😔</div>
+                    <p><strong>Personatge A:</strong> "Fatal... he suspès matemàtiques."</p>
+                    <p><strong>Personatge B:</strong> "Què necessites?"</p>
+                </div>
+                <div class="comic-panel">
+                    <div class="emoji">😊</div>
+                    <p><strong>Personatge A:</strong> "No ho sé... potser parlar una estona."</p>
+                    <p><strong>Personatge B:</strong> "Doncs aquí estic."</p>
+                </div>
+            </div>
+
+            <div class="final-note" style="background: #e1f5fe; border-left-color: #0277bd;">
+                Aquestes preguntes no arreglen tot, però fan que l'altra persona se senti <strong>escoltada</strong>. I això és molt.
+            </div>
+        </div>
+
+        <!-- Slide 4: Activitat -->
+        <div class="slide slide-4">
+            <h1>ARA ÉS EL VOSTRE TORN!</h1>
+            
+            <div class="activity-intro">
+                Ara fareu una activitat on <strong>de veritat</strong> posareu en pràctica l'empatia. No és un examen, és una experiència!
+            </div>
+
+            <div class="steps-container">
+                <div class="step-box">
+                    <div class="step-title">PAS 1: EN PARELLES (20 minuts)</div>
+                    <div class="step-content">
+                        <p>Rebreu <strong>targetes amb problemes reals</strong> que viuen joves com vosaltres.</p>
+                        <div class="role-item">
+                            🔄 <strong>Rol A:</strong> Expliques el problema com si fos teu (2 min)
+                        </div>
+                        <div class="role-item">
+                            👂 <strong>Rol B:</strong> Escoltes i dius com creus que se sent A (2 min)
+                        </div>
+                        <div class="role-item">
+                            ✅ <strong>Rol A:</strong> Confirmes si B ha encertat (1 min)
+                        </div>
+                        <p style="margin-top: 20px;">⏱️ Després, <strong>canvieu els rols</strong> i torneu a fer-ho amb un altre problema.</p>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-title">PAS 2: REFLEXIÓ INDIVIDUAL (8 minuts)</div>
+                    <div class="step-content">
+                        <p>📝 <strong>Escriu en un paper:</strong></p>
+                        <ul style="list-style: none; margin-top: 15px; font-size: 1.1em;">
+                            <li style="margin: 10px 0;">• Quan algú t'ha entès bé, <em>com et vas sentir?</em></li>
+                            <li style="margin: 10px 0;">• Què va fer o dir aquesta persona que et va fer sentir comprès/a?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <p>💡 "No hi ha respostes bones o dolentes"</p>
+                <p>💡 "És normal sentir-se incòmode al principi"</p>
+                <p>💡 "Respecteu els torns i escolteu de veritat"</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Posada en comú -->
+        <div class="slide slide-5">
+            <h1>ARA PARLEM: QUÈ HEU DESCOBERT?</h1>
+
+            <div class="reflection-questions">
+                <div class="reflection-card">
+                    <h2>💭 Pregunta 1:</h2>
+                    <p style="font-size: 1.4em; margin: 20px 0; font-weight: bold;">"Com us heu sentit quan l'altra persona us ha entès bé?"</p>
+                    <p style="font-size: 1.2em; margin: 15px 0; font-style: italic;">Possibles respostes que poden sortir:</p>
+                    <ul>
+                        <li>Alleugerida/o</li>
+                        <li>Menys sol/a</li>
+                        <li>Escoltada/o</li>
+                        <li>Com si m'importés a algú</li>
+                    </ul>
+                </div>
+
+                <div class="reflection-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <h2>💭 Pregunta 2:</h2>
+                    <p style="font-size: 1.4em; margin: 20px 0; font-weight: bold;">"Què és més difícil: explicar com et sents o entendre l'altre?"</p>
+                    <p style="font-size: 1.2em; margin: 15px 0; font-style: italic;">Debat obert:</p>
+                    <ul>
+                        <li>Alguns direu que és difícil explicar-se</li>
+                        <li>Altres direu que és difícil entendre</li>
+                        <li><strong>Les dues coses són difícils!</strong> Per això l'empatia és una habilitat que s'entrena.</li>
+                    </ul>
+                </div>
+
+                <div class="reflection-card" style="background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);">
+                    <h2>💭 Pregunta 3 (bonus):</h2>
+                    <p style="font-size: 1.4em; margin: 20px 0; font-weight: bold;">"Heu descobert alguna cosa nova sobre el vostre company/a?"</p>
+                </div>
+            </div>
+
+            <div class="highlight-message">
+                <strong>Escoltar de veritat no és fàcil.</strong> Però quan ho fem, la connexió amb els altres es multiplica.
+            </div>
+        </div>
+
+        <!-- Slide 6: Conclusió -->
+        <div class="slide slide-6">
+            <h1>QUAN ENTENEM ALS ALTRES, TOTS GUANYEM</h1>
+
+            <div class="key-points">
+                <div class="key-point">
+                    <span class="icon">✅</span>
+                    <span><strong>1. L'empatia és imaginar com se sent l'altre</strong><br>(No cal estar d'acord, només entendre)</span>
+                </div>
+                <div class="key-point">
+                    <span class="icon">✅</span>
+                    <span><strong>2. Dues preguntes màgiques:</strong><br>"Com et sents?" + "Què necessites?"</span>
+                </div>
+                <div class="key-point">
+                    <span class="icon">✅</span>
+                    <span><strong>3. Escoltar de veritat canvia les relacions</strong><br>(Amb amics, família, companys... amb tothom)</span>
+                </div>
+            </div>
+
+            <div class="final-message">
+                "Quan algú se sent entès, tot millora."
+            </div>
+
+            <div class="action-message">
+                <p>A partir d'avui, <strong>practica l'empatia</strong>. Comença amb una persona. Fes-li una pregunta màgica i escolta de veritat. Veuràs la diferència.</p>
+            </div>
+
+            <div class="closing-message">
+                Gràcies per escoltar. Gràcies per participar. I sobretot... <strong>gràcies per voler entendre millor els altres.</strong> 💛
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Següent →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (n > totalSlides) {
+                currentSlide = totalSlides;
+            }
+            if (n < 1) {
+                currentSlide = 1;
+            }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide;
+            
+            prevBtn.disabled = (currentSlide === 1);
+            nextBtn.disabled = (currentSlide === totalSlides);
+            
+            if (currentSlide === totalSlides) {
+                nextBtn.textContent = '🎉 Final';
+            } else {
+                nextBtn.textContent = 'Següent →';
+            }
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        document.getElementById('totalSlides').textContent = totalSlides;
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
